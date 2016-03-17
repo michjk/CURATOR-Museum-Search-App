@@ -1,4 +1,4 @@
-package com.cz2006.curator;
+package com.cz2006.curator.ui;
 /*
  * Copyright (C) 2015 The Android Open Source Project
  *
@@ -25,6 +25,8 @@ package com.cz2006.curator;
         import android.support.v4.app.DialogFragment;
         import android.support.v7.app.AppCompatActivity;
         import android.widget.Toast;
+
+        import com.cz2006.curator.R;
 
 /**
  * Utility class for access to runtime permissions.
