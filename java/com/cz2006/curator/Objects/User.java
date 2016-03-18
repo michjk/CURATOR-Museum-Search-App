@@ -5,23 +5,23 @@ package com.cz2006.curator.Objects;
  */
 public class User {
 
-    private double userLat;
-    private double userLong;
+    private double latitude;
+    private double longitude;
 
-    public double getUserLat() {
-        return userLat;
+    public double getLatitude() {
+        return latitude;
     }
 
-    public void setUserLat(double userLat) {
-        this.userLat = userLat;
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
     }
 
-    public double getUserLong() {
-        return userLong;
+    public double getLongitude() {
+        return longitude;
     }
 
-    public void setUserLong(double userLong) {
-        this.userLong = userLong;
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
     }
 
 }
