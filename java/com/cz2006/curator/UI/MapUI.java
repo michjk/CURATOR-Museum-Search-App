@@ -1,4 +1,4 @@
-package com.cz2006.curator.ui;
+package com.cz2006.curator.UI;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
