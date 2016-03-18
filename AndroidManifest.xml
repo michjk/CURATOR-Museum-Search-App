@@ -29,7 +29,7 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".ui.MapUI"
+            android:name=".UI.MapUI"
             android:label="@string/title_activity_map_screen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
