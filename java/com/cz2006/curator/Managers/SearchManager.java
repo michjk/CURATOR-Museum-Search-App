@@ -1,6 +1,8 @@
 package com.cz2006.curator.Managers;
 
-import java.util.*;
+import com.cz2006.curator.Objects.Museum;
+
+import java.util.ArrayList;
 
 /**
  * Created by Prasanth on 18/03/2016.

@@ -12,44 +12,57 @@ import java.util.ArrayList;
 /**
  * Created by Acceleration on 21/03/2016.
  */
-public abstract class ExhibitionFormatTemplate extends AsyncTask<Void, Void, ArrayList<Exhibition>> implements ExhibitionCrawlerInterface {
+public abstract class ExhibitionFormatTemplate extends AsyncTask<Void, Void, Void> implements ExhibitionCrawlerInterface {
     //array list that contains list of exhibiton that has been crawled
     protected ArrayList<Exhibition> exhibitionList;
-    protected RecyclerView recyclerView;
+    protected RecyclerView.Adapter adapter;
 
-    public ExhibitionFormatTemplate(RecyclerView recyclerView) {
-        this.recyclerView = recyclerView;
+    protected ExhibitionFormatTemplate() {
+        exhibitionList = null;
+        adapter = null;
     }
 
-    private String getName(Element element) {
+    public void setAdapter(RecyclerView.Adapter adapter) {
+        this.adapter = adapter;
+    }
+
+    public void setExhibitionList(ArrayList<Exhibition> exhibitionList) {
+        this.exhibitionList = exhibitionList;
+    }
+
+    public void refresh() {
+        this.execute();
+    }
+
+    protected String getName(Element element) {
         return null;
     }
 
-    private String getDuration(Element element) {
+    protected String getDuration(Element element) {
         return null;
     }
 
-    private String getOrganizer(Element element) {
+    protected String getOrganizer(Element element) {
         return null;
     }
 
-    private String getOpeningHours(Element element) {
+    protected String getOpeningHours(Element element) {
         return null;
     }
 
-    private String getFees(Element element) {
+    protected String getFees(Element element) {
         return null;
     }
 
-    private String getDescription(Element element) {
+    protected String getDescription(Element element) {
         return null;
     }
 
-    private String getRestriction(Element element) {
+    protected String getRestriction(Element element) {
         return null;
     }
 
-    private String getTicketSite(Element element) {
+    protected String getTicketSite(Element element) {
         return null;
     }
 }
