@@ -36,7 +36,7 @@ public class SearchManager {
     public ArrayList<Museum> byProximity() {
         return result;
     }
-/*
+
     //TODO test this
     public Boolean compareByProximity (Museum A, Museum B){
         double distFromA = Math.sqrt((A.latitude - user.latitude) * (A.latitude-user.latitude)
@@ -58,5 +58,5 @@ public class SearchManager {
         if (A.rating > B.rating)
             return true;
         else return false;
-    }*/
+    }
 }
