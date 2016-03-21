@@ -1,25 +1,28 @@
 package com.cz2006.curator.Crawler;
 
-import android.os.AsyncTask;
 import android.support.v7.widget.RecyclerView;
 
 import com.cz2006.curator.Objects.Exhibition;
 
+import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
 import java.util.ArrayList;
 
 /**
  * Created by Acceleration on 21/03/2016.
  */
-public abstract class ExhibitionFormatTemplate extends AsyncTask<Void, Void, Void> implements ExhibitionCrawlerInterface {
+public abstract class ExhibitionCrawlerTemplate implements ExhibitionCrawlerInterface {
     //array list that contains list of exhibiton that has been crawled
     protected ArrayList<Exhibition> exhibitionList;
     protected RecyclerView.Adapter adapter;
+    protected Elements elements;
 
-    protected ExhibitionFormatTemplate() {
+    protected ExhibitionCrawlerTemplate() {
         exhibitionList = null;
         adapter = null;
+        elements = null;
     }
 
     public void setAdapter(RecyclerView.Adapter adapter) {
@@ -31,8 +34,20 @@ public abstract class ExhibitionFormatTemplate extends AsyncTask<Void, Void, Voi
     }
 
     public void refresh() {
-        this.execute();
+        //initialize callback function when fetching document is okay
+        AsyncRespond respond = new AsyncRespond() {
+            @Override
+            public void processFinish(Object output) {
+                extractExhibition((Document)output);
+            }
+        };
+
+        //run asynchronous thread
+        ExhibitionCrawlerThread thread = new ExhibitionCrawlerThread(respond);
+        thread.execute();
     }
+
+    protected abstract void extractExhibition(Document document);
 
     protected String getName(Element element) {
         return null;
