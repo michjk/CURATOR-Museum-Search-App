@@ -1,16 +1,21 @@
 package com.cz2006.curator.Managers;
 
 import com.cz2006.curator.Objects.Museum;
+import com.cz2006.curator.Objects.User;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 /**
  * Created by Prasanth on 18/03/2016.
  */
 public class SearchManager {
-
     //attribute(s)
     private ArrayList<Museum> result;
+
+    //user
+    private User user;
 
     //constructor
     public SearchManager(ArrayList<Museum> result) {
@@ -27,6 +32,15 @@ public class SearchManager {
     }
 
     //methods
+
+    /**
+     * TODO:
+     * The constructor retrieves the list of all museums.
+     */
+    public SearchManager(){
+        result = new ArrayList<Museum>();
+    }
+
     //TODO make this work
     public ArrayList<Museum> search(String request) {
         return result;
@@ -34,29 +48,30 @@ public class SearchManager {
 
     //TODO make this work
     public ArrayList<Museum> byProximity() {
+        Collections.sort(result,new CmpByProximity());
         return result;
     }
 
-    //TODO test this
-    public Boolean compareByProximity (Museum A, Museum B){
-        double distFromA = Math.sqrt((A.latitude - user.latitude) * (A.latitude-user.latitude)
-                + (A.longitude - user.longitude) * (A.longitude-user.longitude));
-        double distFromB = Math.sqrt((B.latitude - user.latitude) * (B.latitude-user.latitude)
-                + (B.longitude - user.longitude) * (B.longitude-user.longitude));
-        if (distFromA > distFromB)
-            return true;
-        else return false;
+    public class CmpByProximity implements Comparator<Museum>{
+        @Override
+        public int compare(Museum a, Museum b) {
+            double distFromA = Math.sqrt(
+                    (a.getLatitude() - user.getLatitude()) * (a.getLatitude() - user.getLatitude()) +
+                    (a.getLongitude() - user.getLongitude()) * (a.getLongitude() - user.getLongitude())
+            );
+            double distFromB = Math.sqrt(
+                    (b.getLatitude() - user.getLatitude()) * (b.getLatitude() - user.getLatitude()) +
+                    (b.getLongitude() - user.getLongitude()) * (b.getLongitude() - user.getLongitude())
+            );
+
+            return ((distFromA < distFromB)?(-1):(1));
+        }
     }
 
-    //TODO make this work
-    public ArrayList<Museum> byRating () {
-        return result;
-    }
-
-    //TODO test this
-    public Boolean compareByRating (Museum A, Museum B) {
-        if (A.rating > B.rating)
-            return true;
-        else return false;
+    public class CmpByRating implements Comparator<Museum>{
+        @Override
+        public int compare(Museum a, Museum b) {
+            return ((a.getRating() > b.getRating())?(-1):(1));
+        }
     }
 }
