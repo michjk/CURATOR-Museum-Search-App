@@ -46,7 +46,6 @@ public class SearchManager {
         return result;
     }
 
-    //TODO make this work
     public ArrayList<Museum> byProximity() {
         Collections.sort(result,new CmpByProximity());
         return result;
