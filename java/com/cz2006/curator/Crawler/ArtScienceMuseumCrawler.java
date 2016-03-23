@@ -9,7 +9,6 @@ import org.jsoup.nodes.Element;
 public class ArtScienceMuseumCrawler extends ExhibitionCrawlerTemplate{
     @Override
     protected void extractExhibition(Document document) {
-
     }
 
     @Override
