@@ -44,7 +44,7 @@ public class MapUI extends AppCompatActivity
     private GoogleApiClient client;
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu){
+     public boolean onCreateOptionsMenu(Menu menu){
         getMenuInflater().inflate(R.menu.map_ui_menu,menu);
         return true;
     }
