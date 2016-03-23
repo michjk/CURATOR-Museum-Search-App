@@ -4,64 +4,69 @@ import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.text.Editable;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
-//import com.cz2006.curator.Managers.SearchManager;
+import com.cz2006.curator.Managers.SearchEngine;
 import com.cz2006.curator.Objects.Museum;
 import com.cz2006.curator.R;
 
 import java.util.ArrayList;
+import java.util.List;
 
-/**
- * Created by EricLeonardo on 3/22/2016.
- */
-public class SearchUI extends AppCompatActivity{
-    private String request = "";
-    private Integer listingType = 0;
-    private ListView museumListView;
-    private SearchManager searchManager;
-
-    private EditText inputText;
+public class SearchUI extends AppCompatActivity implements SearchView.OnQueryTextListener{
+    private RecyclerView rv;
+    private SearchAdapter adapter;
+    private List<Museum> museums;
+    private SearchEngine engine;
 
     @Override
     protected void onCreate(Bundle saved){
         super.onCreate(saved);
         setContentView(R.layout.activity_search);
 
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
-        //searchManager = new SearchManager();
+        rv = (RecyclerView)findViewById(R.id.resultsList);
+        rv.setLayoutManager(new LinearLayoutManager(this));
+
+        engine = new SearchEngine();
+        museums = engine.byProximity();
+
+        adapter = new SearchAdapter(museums);
+        rv.setAdapter(adapter);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
         getMenuInflater().inflate(R.menu.search_ui_menu, menu);
-        SearchView searchView = (SearchView) menu.findItem(R.id.searchBar).getActionView();
-
-        if(searchView != null){
-            searchView.setIconifiedByDefault(false);
+        SearchView searchView = (SearchView) MenuItemCompat.getActionView(menu.findItem(R.id.searchBar));
+        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        if(searchView == null){
+            Toast.makeText(this,"Null search view",Toast.LENGTH_LONG);
+            return true;
         }
+
+        if(searchManager == null){
+            Toast.makeText(this,"Null search manager",Toast.LENGTH_LONG);
+            return true;
+        }
+
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+        searchView.setIconifiedByDefault(false);
+        searchView.setOnQueryTextListener(this);
+        searchView.requestFocus();
         return true;
     }
-
-    /*
-    @Override
-    public boolean onQueryTextSubmit(String query) {
-        return false;
-    }
-
-    @Override
-    public boolean onQueryTextChange(String newText){
-        return false;
-    }
-    */
 
     @Override
     public boolean onOptionsItemSelected (MenuItem item){
@@ -72,12 +77,22 @@ public class SearchUI extends AppCompatActivity{
         return super.onOptionsItemSelected(item);
     }
 
-    /**
-     * TODO
-     * The function updates the search UI with the given search results
-     * @param results search result
-     */
-    void updateResults(ArrayList<Museum> results){
+    private List<Museum> filter(List<Museum> arr, String q){
+        List<Museum> ret = new ArrayList<>();
+        for(Museum m:arr)
+            if(m.getName().toLowerCase().contains(q.toLowerCase()))
+                ret.add(m);
+        return ret;
+    }
 
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        adapter.setFilter(filter(museums,newText));
+        return true;
     }
 }

@@ -8,6 +8,11 @@ public class User {
     private double latitude;
     private double longitude;
 
+    public User(double latitude, double longitude) {
+        this.latitude = latitude;
+        this.longitude = longitude;
+    }
+
     public double getLatitude() {
         return latitude;
     }

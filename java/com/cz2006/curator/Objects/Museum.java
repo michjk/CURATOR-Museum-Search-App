@@ -17,6 +17,32 @@ public class Museum {
     private String ticketSite;
     // arraylist of reviews and exhibitions are not implemented yet
 
+    public Museum(String name, double latitude, double longitude, String address, double rating, String openingHours, String fees, String restriction, String description, String ticketSite) {
+        this.name = name;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.address = address;
+        this.rating = rating;
+        this.openingHours = openingHours;
+        this.fees = fees;
+        this.restriction = restriction;
+        this.description = description;
+        this.ticketSite = ticketSite;
+    }
+
+    public Museum(int id){
+        name = "Sample Museum " + id;
+        latitude = 2.0;
+        longitude = 1.0;
+        address = "";
+        rating = 5.0;
+        openingHours = "7am-19pm";
+        fees = "$5";
+        restriction = "";
+        description = "The Sample Museum " + id + " is a sample museum.";
+        ticketSite = "";
+    }
+
     // Here be getter/setters; abandon hope all ye who enter
 
     public String getTicketSite() {
