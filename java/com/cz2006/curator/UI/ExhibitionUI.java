@@ -19,6 +19,7 @@ public class ExhibitionUI extends AppCompatActivity {
     private ArrayList<Exhibition> exhibitionList;
     private ExhibitionAdapter adapter;
     private ExhibitionCrawlerInterface crawler;
+    private String museumName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +36,8 @@ public class ExhibitionUI extends AppCompatActivity {
         exhibitionList = new ArrayList<>();
         adapter = new ExhibitionAdapter(exhibitionList);
         rv.setAdapter(adapter);
+
+        museumName = "Singapore Art Museum";
 
         crawler = new SingaporeArtMuseumCrawler();
         crawler.setAdapter(adapter);
