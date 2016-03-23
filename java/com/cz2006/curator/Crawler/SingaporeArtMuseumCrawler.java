@@ -2,6 +2,7 @@ package com.cz2006.curator.Crawler;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
 import com.cz2006.curator.Objects.Exhibition;
@@ -25,51 +26,51 @@ public class SingaporeArtMuseumCrawler extends ExhibitionCrawlerTemplate {
         super();
     }
 
-    protected void extractExhibition (Document document) {
-        elements = document.select("article");
+    protected void extractExhibition (Object document) {
+        elements = ((Document)document).select("article");
         //Reset list
         exhibitionList.clear();
 
         //Process each section
-        for (Element e: elements) {
+        for (Element e: (Elements)elements) {
             Exhibition exhibition = new Exhibition(getName(e), getOrganizer(e), getOpeningHours(e),
             getFees(e), getRestriction(e), getDuration(e), getDescription(e), null, getTicketSite(e));
             exhibitionList.add(exhibition);
         }
 
-        adapter.notifyDataSetChanged();
+        ((RecyclerView.Adapter)adapter).notifyDataSetChanged();
     }
 
-    protected String getName(Element element) {
-        return element.select(".MainTitle").text();
+    protected String getName(Object element) {
+        return ((Element)element).select(".MainTitle").text();
     }
 
-    protected String getDuration(Element element) {
-        return element.select("p strong").get(0).text();
+    protected String getDuration(Object element) {
+        return ((Element)element).select("p strong").get(0).text();
     }
 
-    protected String getDescription(Element element) {
-        Elements content = element.select("div.col-left");
+    protected String getDescription(Object element) {
+        Elements content = ((Element)element).select("div.col-left");
         if(content.size() == 0)
-            content = element.select("div[style=float:left; width:380px; ]");
+            content = ((Element)element).select("div[style=float:left; width:380px; ]");
         if(content.size() == 0)
-            content = element.select("div[style=float:right; width:470px; ]");
+            content = ((Element)element).select("div[style=float:right; width:470px; ]");
         if(content.size() == 0)
-            content = element.select("div p span");
+            content = ((Element)element).select("div p span");
 
         return content.text();
     }
 
-    protected Bitmap getImage(Element element) {
+    protected Bitmap getImage(Object element) {
 
         //Get a container where img tag is located
-        Elements imageTag =element.select(".col-right");
+        Elements imageTag =((Element)element).select(".col-right");
         if(imageTag.size()==0)
-            imageTag =  element.select("div[style=float:right; margin:10px 0px 0px 20px; width:350px; ]");
+            imageTag =  ((Element)element).select("div[style=float:right; margin:10px 0px 0px 20px; width:350px; ]");
         if(imageTag.size()==0)
-            imageTag = element.select("div[style=float:right; margin:0px 0px 0px 0px; width:350px; ]");
+            imageTag = ((Element)element).select("div[style=float:right; margin:0px 0px 0px 0px; width:350px; ]");
         if(imageTag.size()==0)
-            imageTag = element.select("div[style=float:left; margin:20px 20px 0px 0px; width:260px; ]");
+            imageTag = ((Element)element).select("div[style=float:left; margin:20px 20px 0px 0px; width:260px; ]");
 
         String imageUrl = null;
 

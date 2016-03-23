@@ -1,12 +1,10 @@
 package com.cz2006.curator.Crawler;
 
-import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 
 import com.cz2006.curator.Objects.Exhibition;
 
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
 
 import java.util.ArrayList;
 
@@ -16,8 +14,8 @@ import java.util.ArrayList;
 public abstract class ExhibitionCrawlerTemplate implements ExhibitionCrawlerInterface {
     //array list that contains list of exhibiton that has been crawled
     protected ArrayList<Exhibition> exhibitionList;
-    protected RecyclerView.Adapter adapter;
-    protected Elements elements;
+    protected Object adapter;
+    protected Object elements;
 
     protected ExhibitionCrawlerTemplate() {
         exhibitionList = null;
@@ -25,7 +23,7 @@ public abstract class ExhibitionCrawlerTemplate implements ExhibitionCrawlerInte
         elements = null;
     }
 
-    public void setAdapter(RecyclerView.Adapter adapter) {
+    public void setAdapter(Object adapter) {
         this.adapter = adapter;
     }
 
@@ -38,7 +36,8 @@ public abstract class ExhibitionCrawlerTemplate implements ExhibitionCrawlerInte
         AsyncRespond respond = new AsyncRespond() {
             @Override
             public void processFinish(Object output) {
-                extractExhibition((Document)output);
+                Log.e("process finish", "process finish");
+                extractExhibition((Document) output);
             }
         };
 
@@ -47,37 +46,37 @@ public abstract class ExhibitionCrawlerTemplate implements ExhibitionCrawlerInte
         thread.execute();
     }
 
-    protected abstract void extractExhibition(Document document);
+    protected abstract void extractExhibition(Object document);
 
-    protected String getName(Element element) {
+    protected String getName(Object element) {
         return null;
     }
 
-    protected String getDuration(Element element) {
+    protected String getDuration(Object element) {
         return null;
     }
 
-    protected String getOrganizer(Element element) {
+    protected String getOrganizer(Object element) {
         return null;
     }
 
-    protected String getOpeningHours(Element element) {
+    protected String getOpeningHours(Object element) {
         return null;
     }
 
-    protected String getFees(Element element) {
+    protected String getFees(Object element) {
         return null;
     }
 
-    protected String getDescription(Element element) {
+    protected String getDescription(Object element) {
         return null;
     }
 
-    protected String getRestriction(Element element) {
+    protected String getRestriction(Object element) {
         return null;
     }
 
-    protected String getTicketSite(Element element) {
+    protected String getTicketSite(Object element) {
         return null;
     }
 }

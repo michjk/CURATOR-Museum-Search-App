@@ -6,7 +6,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.cz2006.curator.Crawler.ExhibitionCrawlerInterface;
-import com.cz2006.curator.Crawler.SingaporeArtMuseumCrawler;
+import com.cz2006.curator.Crawler.NationalMuseumCrawler;
 import com.cz2006.curator.Objects.Exhibition;
 import com.cz2006.curator.R;
 
@@ -39,7 +39,7 @@ public class ExhibitionUI extends AppCompatActivity {
 
         museumName = "Singapore Art Museum";
 
-        crawler = new SingaporeArtMuseumCrawler();
+        crawler = new NationalMuseumCrawler();
         crawler.setAdapter(adapter);
         crawler.setExhibitionList(exhibitionList);
     }

@@ -33,9 +33,9 @@ public class ExhibitionAdapter extends RecyclerView.Adapter<ExhibitionAdapter.Ex
     @Override
     public void onBindViewHolder(ExhibitionViewHolder exhibitionViewHolder, int i) {
         Exhibition ex = exhibitionList.get(i);
-        exhibitionViewHolder.titleText.setText(ex.getName());
-        exhibitionViewHolder.scheduleText.setText(ex.getDuration());
-        exhibitionViewHolder.contentText.setText(ex.getDescription());
+        exhibitionViewHolder.nameText.setText(ex.getName());
+        exhibitionViewHolder.descriptionText.setText(ex.getDescription());
+
         if (ex.getImage() != null)
             Log.e("onBindViewHolder", ex.getName() + " " + String.valueOf(i));
         if (ex.getImage() != null) {
@@ -44,6 +44,23 @@ public class ExhibitionAdapter extends RecyclerView.Adapter<ExhibitionAdapter.Ex
         } else {
             exhibitionViewHolder.imageView.setVisibility(View.GONE);
         }
+
+        if (ex.getDuration() != null) {
+
+            exhibitionViewHolder.durationText.setVisibility(View.VISIBLE);
+            exhibitionViewHolder.durationText.setText(ex.getDuration());
+        } else {
+            exhibitionViewHolder.durationText.setVisibility(View.GONE);
+        }
+
+        if (ex.getOpeningHours() != null) {
+            Log.e("getDuration", ex.getOpeningHours());
+            exhibitionViewHolder.openingHoursView.setVisibility(View.VISIBLE);
+            exhibitionViewHolder.openingHoursView.setText(ex.getOpeningHours());
+        } else {
+            exhibitionViewHolder.openingHoursView.setVisibility(View.GONE);
+        }
+
     }
 
     @Override
@@ -57,17 +74,19 @@ public class ExhibitionAdapter extends RecyclerView.Adapter<ExhibitionAdapter.Ex
 
     public static class ExhibitionViewHolder extends RecyclerView.ViewHolder {
 
-        protected TextView titleText;
-        protected TextView scheduleText;
-        protected TextView contentText;
+        protected TextView nameText;
+        protected TextView durationText;
+        protected TextView descriptionText;
         protected ImageView imageView;
+        protected TextView openingHoursView;
 
         public ExhibitionViewHolder(View v) {
             super(v);
-            titleText = (TextView) v.findViewById(R.id.title);
-            scheduleText = (TextView) v.findViewById(R.id.schedule);
-            contentText = (TextView) v.findViewById(R.id.content);
+            nameText = (TextView) v.findViewById(R.id.name);
+            durationText = (TextView) v.findViewById(R.id.duration);
+            descriptionText = (TextView) v.findViewById(R.id.description);
             imageView = (ImageView) v.findViewById(R.id.image);
+            openingHoursView = (TextView) v.findViewById(R.id.openingHours);
         }
     }
 }

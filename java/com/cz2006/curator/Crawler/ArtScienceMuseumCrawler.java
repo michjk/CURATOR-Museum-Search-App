@@ -1,14 +1,14 @@
 package com.cz2006.curator.Crawler;
 
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-
 /**
  * Created by Acceleration on 21/03/2016.
  */
-public class ArtScienceMuseumCrawler extends ExhibitionCrawlerTemplate{
+public class ArtScienceMuseumCrawler{
+    /*
     @Override
     protected void extractExhibition(Document document) {
+        //elements = document.select(".mainContentWrapper");
+        //Log.e("exractExhibition", elements.toString());
     }
 
     @Override
@@ -49,5 +49,5 @@ public class ArtScienceMuseumCrawler extends ExhibitionCrawlerTemplate{
     @Override
     protected String getTicketSite(Element element) {
         return super.getTicketSite(element);
-    }
+    }*/
 }
