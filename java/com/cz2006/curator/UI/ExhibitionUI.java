@@ -5,8 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-import com.cz2006.curator.Crawler.ExhibitionCrawlerInterface;
-import com.cz2006.curator.Crawler.NationalMuseumCrawler;
+import com.cz2006.curator.Managers.ExhibitionManager;
 import com.cz2006.curator.Objects.Exhibition;
 import com.cz2006.curator.R;
 
@@ -18,8 +17,8 @@ public class ExhibitionUI extends AppCompatActivity {
     private LinearLayoutManager llm;
     private ArrayList<Exhibition> exhibitionList;
     private ExhibitionAdapter adapter;
-    private ExhibitionCrawlerInterface crawler;
     private String museumName;
+    private ExhibitionManager exhibitionManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,14 +38,14 @@ public class ExhibitionUI extends AppCompatActivity {
 
         museumName = "Singapore Art Museum";
 
-        crawler = new NationalMuseumCrawler();
-        crawler.setAdapter(adapter);
-        crawler.setExhibitionList(exhibitionList);
+        exhibitionManager = new ExhibitionManager(exhibitionList, adapter);
+
+
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        crawler.refresh();
+        exhibitionManager.refresh();
     }
 }
