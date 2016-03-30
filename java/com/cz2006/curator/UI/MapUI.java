@@ -14,6 +14,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.cz2006.curator.Crawler.MuseumsCrawler;
 import com.cz2006.curator.R;
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
@@ -23,7 +24,17 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.maps.android.kml.KmlContainer;
+import com.google.maps.android.kml.KmlLayer;
+import com.google.maps.android.kml.KmlPlacemark;
+import com.google.maps.android.kml.KmlPolygon;
+
+import org.xmlpull.v1.XmlPullParserException;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 public class MapUI extends AppCompatActivity
         implements
@@ -33,10 +44,11 @@ public class MapUI extends AppCompatActivity
 
 
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
-
+    private MuseumsCrawler mcrawler;
     private boolean mPermissionDenied = false;
 
     private GoogleMap mMap;
+    private KmlLayer kl;
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -101,7 +113,45 @@ public class MapUI extends AppCompatActivity
         LatLng museumLoc = new LatLng(1.331906740822655, 103.6768145953503);
         mMap.addMarker(new MarkerOptions().position(museumLoc).title("Marker on Museum"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(museumLoc));
+
+
+        try {
+            kl = new KmlLayer(mMap,R.raw.museums,getApplicationContext());
+            kl.addLayerToMap();
+
+            /*
+            mMap.setOnMapLoadedCallback(new GoogleMap.OnMapLoadedCallback() {
+                @Override
+                public void onMapLoaded() {
+                    moveCameraToKml(kl);
+                }
+            });
+            */
+        } catch (XmlPullParserException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
+
+    private void moveCameraToKml(KmlLayer kmlLayer) {
+        //Retrieve the first container in the KML layer
+        KmlContainer container = kmlLayer.getContainers().iterator().next();
+        //Retrieve a nested container within the first container
+        container = container.getContainers().iterator().next();
+        //Retrieve the first placemark in the nested container
+        KmlPlacemark placemark = container.getPlacemarks().iterator().next();
+        //Retrieve a polygon object in a placemark
+        KmlPolygon polygon = (KmlPolygon) placemark.getGeometry();
+        //Create LatLngBounds of the outer coordinates of the polygon
+        LatLngBounds.Builder builder = new LatLngBounds.Builder();
+        for (LatLng latLng : polygon.getOuterBoundaryCoordinates()) {
+            builder.include(latLng);
+        }
+        mMap.moveCamera(CameraUpdateFactory.newLatLngBounds(builder.build(), 1));
+    }
+
 
     private void enableMyLocation() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
