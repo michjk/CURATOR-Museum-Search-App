@@ -13,8 +13,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
-
-import com.cz2006.curator.Crawler.MuseumsCrawler;
 import com.cz2006.curator.R;
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
@@ -44,7 +42,6 @@ public class MapUI extends AppCompatActivity
 
 
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
-    private MuseumsCrawler mcrawler;
     private boolean mPermissionDenied = false;
 
     private GoogleMap mMap;
