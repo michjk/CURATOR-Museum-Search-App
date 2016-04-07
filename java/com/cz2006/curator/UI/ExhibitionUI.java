@@ -38,7 +38,7 @@ public class ExhibitionUI extends AppCompatActivity {
 
         museumName = "Singapore Art Museum";
 
-        exhibitionManager = new ExhibitionManager(exhibitionList, adapter);
+        exhibitionManager = new ExhibitionManager(exhibitionList, adapter, this);
 
 
     }

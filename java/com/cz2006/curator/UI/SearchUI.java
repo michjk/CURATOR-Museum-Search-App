@@ -2,20 +2,14 @@ package com.cz2006.curator.UI;
 
 import android.app.SearchManager;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.MenuItemCompat;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
-import android.text.Editable;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.Toast;
 
 import com.cz2006.curator.Managers.SearchEngine;
@@ -30,6 +24,7 @@ public class SearchUI extends AppCompatActivity implements SearchView.OnQueryTex
     private SearchAdapter adapter;
     private List<Museum> museums;
     private SearchEngine engine;
+    private Context context;
 
     @Override
     protected void onCreate(Bundle saved){
@@ -44,7 +39,9 @@ public class SearchUI extends AppCompatActivity implements SearchView.OnQueryTex
 
         adapter = new SearchAdapter(museums);
         rv.setAdapter(adapter);
+
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
