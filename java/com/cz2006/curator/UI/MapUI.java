@@ -23,6 +23,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.maps.android.kml.KmlContainer;
 import com.google.maps.android.kml.KmlLayer;
@@ -37,6 +38,7 @@ import java.io.IOException;
 public class MapUI extends AppCompatActivity
         implements
         GoogleMap.OnMyLocationButtonClickListener,
+        GoogleMap.OnInfoWindowClickListener,
         OnMapReadyCallback,
         ActivityCompat.OnRequestPermissionsResultCallback {
 
@@ -51,6 +53,8 @@ public class MapUI extends AppCompatActivity
      * See https://g.co/AppIndexing/AndroidStudio for more information.
      */
     private GoogleApiClient client;
+
+    public final static String EXTRA_MESSAGE = "com.cz2006.curator.MESSAGE";
 
     @Override
      public boolean onCreateOptionsMenu(Menu menu){
@@ -107,10 +111,12 @@ public class MapUI extends AppCompatActivity
         //mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
         //mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
 
+        mMap.setOnInfoWindowClickListener(this);
+
         LatLng museumLoc = new LatLng(1.331906740822655, 103.6768145953503);
         mMap.addMarker(new MarkerOptions().position(museumLoc).title("Marker on Museum"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(museumLoc));
-
+        mMap.animateCamera( CameraUpdateFactory.zoomTo( 10.0f ) );
 
         try {
             kl = new KmlLayer(mMap,R.raw.museums,getApplicationContext());
@@ -205,6 +211,17 @@ public class MapUI extends AppCompatActivity
         // (the camera animates to the user's current position).
         return false;
     }
+
+    @Override
+    public void onInfoWindowClick(final Marker marker) {
+
+        Intent intent = new Intent(this, MuseumProfileUI.class);
+        String message = marker.getTitle();
+        // Name should be placed in title
+        intent.putExtra(EXTRA_MESSAGE, message);
+        startActivity(intent);
+    }
+
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
                                            @NonNull int[] grantResults) {

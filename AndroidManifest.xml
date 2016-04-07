@@ -35,7 +35,11 @@
         <activity
             android:name=".UI.MapUI"
             android:label="@string/title_activity_map_screen">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
 
         </activity>
         <!--
@@ -46,12 +50,10 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-        <activity android:name=".UI.MuseumProfileUI" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+        <activity
+            android:name=".UI.MuseumProfileUI"
+            android:parentActivityName=".UI.MapUI">
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
         <activity
