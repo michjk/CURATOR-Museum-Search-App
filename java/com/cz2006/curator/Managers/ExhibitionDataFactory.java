@@ -35,9 +35,6 @@ public class ExhibitionDataFactory {
             Log.e("exhibitionCraw", exhibitionCrawlerImpl.toString());
 
 
-
-
-
             /*
 
             String apkName = context.getPackageManager().getApplicationInfo(packageName, 0).sourceDir;
