@@ -1,5 +1,6 @@
 package com.cz2006.curator.Dialogs;
 
+import android.app.Dialog;
 import android.app.DialogFragment;
 
 /**
