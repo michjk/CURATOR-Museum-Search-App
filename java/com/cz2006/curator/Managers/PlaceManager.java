@@ -1,11 +1,12 @@
 package com.cz2006.curator.Managers;
+
+import com.google.android.gms.location.places.Places;
+
 import com.cz2006.curator.Dialogs.GenericAlertDialog;
 import com.cz2006.curator.R;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.GoogleApiClient.OnConnectionFailedListener;
-import com.google.android.gms.location.places.Places;
-
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -30,10 +31,10 @@ implements OnConnectionFailedListener {
                 .build();
     }
 
-
     @Override
     public void onConnectionFailed(ConnectionResult connectionResult) {
         GenericAlertDialog genericAlertDialog = new GenericAlertDialog();
         genericAlertDialog.show(getFragmentManager(), "temp");
+
     }
 }

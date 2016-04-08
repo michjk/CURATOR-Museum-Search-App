@@ -1,0 +1,6 @@
+Singapore Art Museum
+SingaporeArtMuseumCrawler
+https://www.singaporeartmuseum.sg/exhibitions/current.html
+National Museum of Singapore
+NationalMuseumCrawler
+http://nationalmuseum.sg/exhibitions/exhibition-list#&&activeTab=Permanent&page=0

@@ -40,7 +40,6 @@ public class ExhibitionUI extends AppCompatActivity {
 
         exhibitionManager = new ExhibitionManager(exhibitionList, adapter, this);
 
-
     }
 
     @Override
