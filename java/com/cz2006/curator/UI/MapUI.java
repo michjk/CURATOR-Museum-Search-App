@@ -8,11 +8,13 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
+
+import com.cz2006.curator.Managers.MapManager;
 import com.cz2006.curator.R;
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
@@ -32,7 +34,6 @@ import com.google.maps.android.kml.KmlPolygon;
 
 import org.xmlpull.v1.XmlPullParserException;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class MapUI extends AppCompatActivity
@@ -48,6 +49,9 @@ public class MapUI extends AppCompatActivity
 
     private GoogleMap mMap;
     private KmlLayer kl;
+    private MapManager mapManager;
+
+
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -88,8 +92,17 @@ public class MapUI extends AppCompatActivity
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+
+        mapManager = new MapManager();
+
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.e("sadma","eadfdf");
+        mapManager.refresh();
+    }
 
     /**
      * Manipulates the map once available.

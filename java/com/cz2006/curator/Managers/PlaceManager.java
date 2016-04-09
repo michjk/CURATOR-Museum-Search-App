@@ -1,15 +1,14 @@
 package com.cz2006.curator.Managers;
 
-import com.google.android.gms.location.places.Places;
+import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 
 import com.cz2006.curator.Dialogs.GenericAlertDialog;
 import com.cz2006.curator.R;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.GoogleApiClient.OnConnectionFailedListener;
-
-import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
+import com.google.android.gms.location.places.Places;
 
 /**
  * Created by Prasanth on 08/04/2016.
@@ -29,6 +28,7 @@ implements OnConnectionFailedListener {
                 .addApi(Places.PLACE_DETECTION_API)
                 .enableAutoManage(this, this)
                 .build();
+
     }
 
     @Override

@@ -20,6 +20,7 @@ public class ExhibitionUI extends AppCompatActivity {
     private String museumName;
     private ExhibitionManager exhibitionManager;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,8 +36,6 @@ public class ExhibitionUI extends AppCompatActivity {
         exhibitionList = new ArrayList<>();
         adapter = new ExhibitionAdapter(exhibitionList);
         rv.setAdapter(adapter);
-
-        museumName = "Singapore Art Museum";
 
         exhibitionManager = new ExhibitionManager(exhibitionList, adapter, this);
 

@@ -7,11 +7,14 @@ import android.content.Intent;
 import android.widget.TextView;
 
 import com.cz2006.curator.Constants.ExhibitionConstants;
+import com.cz2006.curator.Managers.MuseumProfileManager;
 import com.cz2006.curator.R;
 
 public class MuseumProfileUI extends AppCompatActivity {
 
-    public final static String EXTRA_MESSAGE = "com.cz2006.curator.MESSAGE";
+    private final static String EXTRA_MESSAGE = "com.cz2006.curator.MESSAGE";
+
+    private MuseumProfileManager museumProfileManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +26,17 @@ public class MuseumProfileUI extends AppCompatActivity {
         title.setText(museumName);
 
         ExhibitionConstants.setExhibitionConstants(this);
+
+        String placeId = "ChIJW8o1nqQZ2jERynZN2M1BODM";
+
+        museumProfileManager = new MuseumProfileManager(placeId);
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        museumProfileManager.refresh();
 
     }
 
