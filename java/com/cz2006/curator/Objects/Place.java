@@ -10,13 +10,15 @@ public class Place {
     private Double lng;
     private String placeId;
     private Double rating;
+    private String address;
 
-    public Place(String name, Double lat, Double lng, Double rating, String placeId) {
+    public Place(String name, String address, Double lat, Double lng, Double rating, String placeId) {
         this.name = name;
         this.lat = lat;
         this.lng = lng;
         this.placeId = placeId;
         this.rating = rating;
+        this.address = address;
     }
 
     public String getName() {

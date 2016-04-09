@@ -72,6 +72,7 @@ public class PlaceCrawler extends AsyncTask<String, Void, ArrayList<Place>> impl
 
 
             Place place = new Place(getValue(e, PlaceConstants.KEY_NAME)
+                    , getValue(e,"formatted_address")
                     , Double.parseDouble(getValue(e, PlaceConstants.KEY_LAT))
                     , Double.parseDouble(getValue(e, PlaceConstants.KEY_LNG))
                     , rating
