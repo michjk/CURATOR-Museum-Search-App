@@ -6,10 +6,12 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.cz2006.curator.Constants.ExhibitionConstants;
 import com.cz2006.curator.Managers.MuseumProfileManager;
+import com.cz2006.curator.Objects.Museum;
 import com.cz2006.curator.R;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -28,13 +30,9 @@ public class MuseumProfileUI extends AppCompatActivity implements GoogleApiClien
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_museum_profile_ui);
 
-        String museumName = getIntent().getStringExtra(EXTRA_MESSAGE);
-        TextView title = (TextView) findViewById(R.id.museum_name);
-        title.setText(museumName);
+        String museumID = getIntent().getStringExtra(EXTRA_MESSAGE);
 
         ExhibitionConstants.setExhibitionConstants(this);
-
-        String placeId = "ChIJW8o1nqQZ2jERynZN2M1BODM";
 
         mGoogleApiClient = new GoogleApiClient
                 .Builder(this)
@@ -44,7 +42,7 @@ public class MuseumProfileUI extends AppCompatActivity implements GoogleApiClien
                 .build();
 
 
-        museumProfileManager = new MuseumProfileManager(placeId, mGoogleApiClient);
+        museumProfileManager = new MuseumProfileManager(museumID, mGoogleApiClient, this);
     }
 
     @Override
@@ -56,7 +54,6 @@ public class MuseumProfileUI extends AppCompatActivity implements GoogleApiClien
     protected void onResume() {
         super.onResume();
         museumProfileManager.refresh();
-
     }
 
     public void onClickExhibition(View view) {
@@ -69,6 +66,34 @@ public class MuseumProfileUI extends AppCompatActivity implements GoogleApiClien
         // this message means nothing for now
         intent.putExtra(EXTRA_MESSAGE, message);
         startActivity(intent);
+    }
+
+    public void displayData(Museum museum) {
+
+        String openingHourList = "Opening Hours: \n";
+
+        if (museum != null) {
+            TextView title = (TextView) findViewById(R.id.museum_name);
+            title.setText(museum.getName());
+
+            ImageView image = (ImageView) findViewById(R.id.image);
+            image.setImageBitmap(museum.getImage());
+
+            TextView address = (TextView) findViewById(R.id.address);
+            address.setText("Address: " + museum.getAddress());
+
+            TextView openingHours = (TextView) findViewById(R.id.opening_hours);
+            for(String o :museum.getOpeningHours()) {
+                openingHourList = openingHourList + o + "\n";
+            }
+            openingHours.setText(openingHourList);
+
+            TextView phoneNo = (TextView) findViewById(R.id.phone);
+            phoneNo.setText("Phone No.: " + museum.getPhone());
+
+            TextView website = (TextView) findViewById(R.id.website);
+            website.setText("Website: " + museum.getTicketSite());
+        }
     }
 
 }

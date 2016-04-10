@@ -93,7 +93,7 @@ public class MapUI extends AppCompatActivity
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
 
-        mapManager = new MapManager();
+
 
     }
 
@@ -101,7 +101,7 @@ public class MapUI extends AppCompatActivity
     protected void onResume() {
         super.onResume();
         Log.e("sadma","eadfdf");
-        mapManager.refresh();
+        //mapManager.refresh(mMap);
     }
 
     /**
@@ -125,29 +125,31 @@ public class MapUI extends AppCompatActivity
         //mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
 
         mMap.setOnInfoWindowClickListener(this);
+        mapManager = new MapManager(mMap);
+        mapManager.refresh();
 
         LatLng museumLoc = new LatLng(1.331906740822655, 103.6768145953503);
         mMap.addMarker(new MarkerOptions().position(museumLoc).title("Marker on Museum"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(museumLoc));
         mMap.animateCamera( CameraUpdateFactory.zoomTo( 10.0f ) );
 
-        try {
-            kl = new KmlLayer(mMap,R.raw.museums,getApplicationContext());
-            kl.addLayerToMap();
-
-            /*
-            mMap.setOnMapLoadedCallback(new GoogleMap.OnMapLoadedCallback() {
-                @Override
-                public void onMapLoaded() {
-                    moveCameraToKml(kl);
-                }
-            });
-            */
-        } catch (XmlPullParserException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            kl = new KmlLayer(mMap,R.raw.museums,getApplicationContext());
+//            kl.addLayerToMap();
+//
+//            /*
+//            mMap.setOnMapLoadedCallback(new GoogleMap.OnMapLoadedCallback() {
+//                @Override
+//                public void onMapLoaded() {
+//                    moveCameraToKml(kl);
+//                }
+//            });
+//            */
+//        } catch (XmlPullParserException e) {
+//            e.printStackTrace();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
 
     }
 
@@ -229,7 +231,7 @@ public class MapUI extends AppCompatActivity
     public void onInfoWindowClick(final Marker marker) {
 
         Intent intent = new Intent(this, MuseumProfileUI.class);
-        String message = marker.getTitle();
+        String message = mapManager.findID(marker.getTitle());
         // Name should be placed in title
         intent.putExtra(EXTRA_MESSAGE, message);
         startActivity(intent);

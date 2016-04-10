@@ -16,22 +16,22 @@ public class Museum {
     private double rating;
     private ArrayList<String> openingHours;
     private Bitmap image;
-    private String fees;
-    private String restriction;
+    private String phone;
+    private String email;
     private String description;
     private String ticketSite;
     private ArrayList<Review> reviewList;
     // arraylist of reviews and exhibitions are not implemented yet
 
-    public Museum(String name, double latitude, double longitude, String address, double rating, ArrayList<String> openingHours, String fees, String restriction, String description, String ticketSite, ArrayList<Review> reviewList, Bitmap image) {
+    public Museum(String name, double latitude, double longitude, String address, double rating, ArrayList<String> openingHours, String phone, String email, String description, String ticketSite, ArrayList<Review> reviewList, Bitmap image) {
         this.name = name;
         this.latitude = latitude;
         this.longitude = longitude;
         this.address = address;
         this.rating = rating;
         this.openingHours = openingHours;
-        this.fees = fees;
-        this.restriction = restriction;
+        this.phone = phone;
+        this.email = email;
         this.description = description;
         this.ticketSite = ticketSite;
         this.reviewList = reviewList;
@@ -47,8 +47,8 @@ public class Museum {
         address = "";
         rating = 5.0;
         openingHours = null;
-        fees = "$5";
-        restriction = "";
+        phone = "";
+        email = "";
         description = "The Sample Museum " + id + " is a sample museum.";
         ticketSite = "";
     }
@@ -109,20 +109,20 @@ public class Museum {
         this.openingHours = openingHours;
     }
 
-    public String getFees() {
-        return fees;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setFees(String fees) {
-        this.fees = fees;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
-    public String getRestriction() {
-        return restriction;
+    public String getEmail() {
+        return email;
     }
 
-    public void setRestriction(String restriction) {
-        this.restriction = restriction;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getDescription() {
