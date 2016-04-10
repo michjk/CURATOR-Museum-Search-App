@@ -1,20 +1,27 @@
 package com.cz2006.curator.UI;
 
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.view.View;
 import android.content.Intent;
+import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 
 import com.cz2006.curator.Constants.ExhibitionConstants;
 import com.cz2006.curator.Managers.MuseumProfileManager;
 import com.cz2006.curator.R;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.places.Places;
 
-public class MuseumProfileUI extends AppCompatActivity {
+public class MuseumProfileUI extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener{
 
     private final static String EXTRA_MESSAGE = "com.cz2006.curator.MESSAGE";
 
     private MuseumProfileManager museumProfileManager;
+
+    private GoogleApiClient mGoogleApiClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,8 +36,20 @@ public class MuseumProfileUI extends AppCompatActivity {
 
         String placeId = "ChIJW8o1nqQZ2jERynZN2M1BODM";
 
-        museumProfileManager = new MuseumProfileManager(placeId);
+        mGoogleApiClient = new GoogleApiClient
+                .Builder(this)
+                .addApi(Places.GEO_DATA_API)
+                .addApi(Places.PLACE_DETECTION_API)
+                .enableAutoManage(this, this)
+                .build();
 
+
+        museumProfileManager = new MuseumProfileManager(placeId, mGoogleApiClient);
+    }
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+        Log.e("MuseumProfileUI", connectionResult.toString());
     }
 
     @Override

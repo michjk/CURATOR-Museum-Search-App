@@ -1,5 +1,9 @@
 package com.cz2006.curator.Objects;
 
+import android.graphics.Bitmap;
+
+import java.util.ArrayList;
+
 /**
  * Created by Vicson on 18/3/2016.
  */
@@ -10,14 +14,16 @@ public class Museum {
     private double longitude;
     private String address;
     private double rating;
-    private String openingHours;
+    private ArrayList<String> openingHours;
+    private Bitmap image;
     private String fees;
     private String restriction;
     private String description;
     private String ticketSite;
+    private ArrayList<Review> reviewList;
     // arraylist of reviews and exhibitions are not implemented yet
 
-    public Museum(String name, double latitude, double longitude, String address, double rating, String openingHours, String fees, String restriction, String description, String ticketSite) {
+    public Museum(String name, double latitude, double longitude, String address, double rating, ArrayList<String> openingHours, String fees, String restriction, String description, String ticketSite, ArrayList<Review> reviewList, Bitmap image) {
         this.name = name;
         this.latitude = latitude;
         this.longitude = longitude;
@@ -28,7 +34,11 @@ public class Museum {
         this.restriction = restriction;
         this.description = description;
         this.ticketSite = ticketSite;
+        this.reviewList = reviewList;
+        this.image = image;
     }
+
+
 
     public Museum(int id){
         name = "Sample Museum " + id;
@@ -36,7 +46,7 @@ public class Museum {
         longitude = 1.0;
         address = "";
         rating = 5.0;
-        openingHours = "7am-19pm";
+        openingHours = null;
         fees = "$5";
         restriction = "";
         description = "The Sample Museum " + id + " is a sample museum.";
@@ -91,11 +101,11 @@ public class Museum {
         this.rating = rating;
     }
 
-    public String getOpeningHours() {
+    public ArrayList<String> getOpeningHours() {
         return openingHours;
     }
 
-    public void setOpeningHours(String openingHours) {
+    public void setOpeningHours(ArrayList<String> openingHours) {
         this.openingHours = openingHours;
     }
 
@@ -123,5 +133,19 @@ public class Museum {
         this.description = description;
     }
 
+    public Bitmap getImage() {
+        return image;
+    }
 
+    public void setImage(Bitmap image) {
+        this.image = image;
+    }
+
+    public ArrayList<Review> getReviewList() {
+        return reviewList;
+    }
+
+    public void setReviewList(ArrayList<Review> reviewList) {
+        this.reviewList = reviewList;
+    }
 }
