@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.cz2006.curator.Managers.MapManager;
+import com.cz2006.curator.Objects.Museum;
 import com.cz2006.curator.R;
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
@@ -35,6 +36,7 @@ import com.google.maps.android.kml.KmlPolygon;
 import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class MapUI extends AppCompatActivity
         implements
@@ -51,7 +53,7 @@ public class MapUI extends AppCompatActivity
     private KmlLayer kl;
     private MapManager mapManager;
 
-
+    private ArrayList<Museum> museumList;
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -71,6 +73,23 @@ public class MapUI extends AppCompatActivity
         int id = item.getItemId();
         if(id == R.id.action_search){
             Intent it = new Intent(this,SearchUI.class);
+
+            while(museumList == null || museumList.size() == 0){
+                mapManager.refresh();
+                museumList = mapManager.getMuseumList();
+            }
+
+            Log.e("MapUI","Passing museumList");
+            if(museumList == null || museumList.size() == 0) Log.e("WARNING","still null");
+            else Log.e("WARNING","GOOD JOB");
+            int i = 0;
+            for(Museum m:museumList){
+                Log.e(Integer.valueOf(++i).toString(),m.getName());
+            }
+            
+            
+            it.putExtra("museumList",museumList);
+            
             startActivity(it);
             return true;
         }
@@ -127,6 +146,10 @@ public class MapUI extends AppCompatActivity
         mMap.setOnInfoWindowClickListener(this);
         mapManager = new MapManager(mMap);
         mapManager.refresh();
+
+        if(museumList == null || museumList.size() == 0) {
+            museumList = mapManager.getMuseumList();
+        }
 
         LatLng museumLoc = new LatLng(1.331906740822655, 103.6768145953503);
         mMap.addMarker(new MarkerOptions().position(museumLoc).title("Marker on Museum"));

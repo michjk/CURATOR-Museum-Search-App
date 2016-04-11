@@ -5,6 +5,7 @@ import android.util.Log;
 import com.cz2006.curator.Crawler.AsyncRespond;
 import com.cz2006.curator.Crawler.PlaceCrawler;
 import com.cz2006.curator.Crawler.PlaceCrawlerInterface;
+import com.cz2006.curator.Objects.Museum;
 import com.cz2006.curator.Objects.Place;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
@@ -23,6 +24,15 @@ public class MapManager {
 
     public MapManager(GoogleMap map) {
         mMap = map;
+    }
+    
+    public ArrayList<Museum> getMuseumList(){
+        if(placeList == null) return null;
+        ArrayList<Museum> arr = new ArrayList<Museum>();
+        for(Place p:placeList){
+            arr.add(new Museum(p.getName(),p.getLat(),p.getLng(),"",0.0,null,"","","","",null,null));
+        }
+        return arr;
     }
 
     public void refresh() {

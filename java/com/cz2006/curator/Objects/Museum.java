@@ -2,12 +2,13 @@ package com.cz2006.curator.Objects;
 
 import android.graphics.Bitmap;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Created by Vicson on 18/3/2016.
  */
-public class Museum {
+public class Museum implements Serializable{
 
     private String name;
     private double latitude;
@@ -23,7 +24,7 @@ public class Museum {
     private ArrayList<Review> reviewList;
     // arraylist of reviews and exhibitions are not implemented yet
 
-    public Museum(String name, double latitude, double longitude, String address, double rating, ArrayList<String> openingHours, String phone, String email, String description, String ticketSite, ArrayList<Review> reviewList, Bitmap image) {
+    public Museum(String name, double latitude, double longitude, String address, double rating, ArrayList<String> openingHours, String phone, String email, String description, String ticketSite, ArrayList<Review> reviewList, Bitmap image){
         this.name = name;
         this.latitude = latitude;
         this.longitude = longitude;

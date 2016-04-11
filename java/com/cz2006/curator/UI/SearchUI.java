@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -34,9 +35,13 @@ public class SearchUI extends AppCompatActivity implements SearchView.OnQueryTex
         rv = (RecyclerView)findViewById(R.id.resultsList);
         rv.setLayoutManager(new LinearLayoutManager(this));
 
-        engine = new SearchEngine();
-        museums = engine.byProximity();
 
+		museums = (ArrayList<Museum>) getIntent().getSerializableExtra("museumList");
+
+        if(museums == null){
+            Log.e("ERROR","museums are null");
+            return;
+        }
         adapter = new SearchAdapter(museums);
         rv.setAdapter(adapter);
 

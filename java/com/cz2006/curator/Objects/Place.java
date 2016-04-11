@@ -1,9 +1,11 @@
 package com.cz2006.curator.Objects;
 
+import java.io.Serializable;
+
 /**
  * Created by Acceleration on 09/04/2016.
  */
-public class Place {
+public class Place  implements Serializable {
 
     private String name;
     private Double lat;
