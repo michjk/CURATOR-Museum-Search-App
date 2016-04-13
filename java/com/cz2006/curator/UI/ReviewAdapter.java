@@ -1,6 +1,7 @@
 package com.cz2006.curator.UI;
  
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,6 +47,7 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ReviewView
         holder.date.setText(r.getDate().toString());
         holder.score.setText(r.getRating().toString());
 		holder.text.setText(r.getText());
+        Log.e("Author", holder.author.toString());
     }
  
     @Override

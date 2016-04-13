@@ -3,6 +3,7 @@ package com.cz2006.curator.UI;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -16,6 +17,7 @@ import android.widget.Toast;
 
 import com.cz2006.curator.Managers.MapManager;
 import com.cz2006.curator.Objects.Museum;
+import com.cz2006.curator.Objects.User;
 import com.cz2006.curator.R;
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
@@ -86,14 +88,24 @@ public class MapUI extends AppCompatActivity
             for(Museum m:museumList){
                 Log.e(Integer.valueOf(++i).toString(),m.getName());
             }
-            
-            
+
             it.putExtra("museumList",museumList);
-            
+            it.putExtra("userLocation", getUserLocation());
+
             startActivity(it);
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public User getUserLocation(){
+        Location loc = mMap.getMyLocation();
+            if(loc!=null){
+                double lat = loc.getLatitude();
+                double lon = loc.getLongitude();
+                return new User(lat,lon);
+            }
+            else return new User(0,0);
     }
 
     @Override
@@ -151,10 +163,9 @@ public class MapUI extends AppCompatActivity
             museumList = mapManager.getMuseumList();
         }
 
-        LatLng museumLoc = new LatLng(1.331906740822655, 103.6768145953503);
-        mMap.addMarker(new MarkerOptions().position(museumLoc).title("Marker on Museum"));
+        LatLng museumLoc = new LatLng(1.297240598945015, 103.850948911553);
         mMap.moveCamera(CameraUpdateFactory.newLatLng(museumLoc));
-        mMap.animateCamera( CameraUpdateFactory.zoomTo( 10.0f ) );
+        mMap.animateCamera( CameraUpdateFactory.zoomTo( 15.0f ) );
 
 //        try {
 //            kl = new KmlLayer(mMap,R.raw.museums,getApplicationContext());

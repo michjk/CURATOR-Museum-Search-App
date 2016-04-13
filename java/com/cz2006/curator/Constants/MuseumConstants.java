@@ -5,8 +5,11 @@ package com.cz2006.curator.Constants;
  */
 public class MuseumConstants {
 
-    //private static final String API_KEY = "AIzaSyAMA_EoylT2Dz_grch1O9Wd8bziEpKzAg4";  // key 1
-    private static final String API_KEY = "AIzaSyAiaOUB4sQnnkyNZeo63hGHjFrYX8UEB6E";    // key 2
+    //*  <<- Add/remove one '/' here to toggle between key 1 and key 2
+    private static final String API_KEY = "AIzaSyAMA_EoylT2Dz_grch1O9Wd8bziEpKzAg4";
+    /*/
+    private static final String API_KEY = "AIzaSyAiaOUB4sQnnkyNZeo63hGHjFrYX8UEB6E";
+    //*/
     public static String URL = "https://maps.googleapis.com/maps/api/place/details/json?key=" + API_KEY + "&placeid=";
     public static final String KEY_ITEM = "result"; // parent node
     public static final String KEY_ID = "place_id";

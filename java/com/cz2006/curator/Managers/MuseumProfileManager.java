@@ -22,6 +22,11 @@ public class MuseumProfileManager {
     private String placeId;
     private GoogleApiClient mGoogleApiClient;
     private MuseumProfileUI museumUI;
+
+    public Museum getMuseum() {
+        return museum;
+    }
+
     private Museum museum;
 
     public MuseumProfileManager(String placeId, GoogleApiClient mGoogleApiClient, MuseumProfileUI ui) {

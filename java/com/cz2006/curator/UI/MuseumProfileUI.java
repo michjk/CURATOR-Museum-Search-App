@@ -55,6 +55,14 @@ public class MuseumProfileUI extends AppCompatActivity implements GoogleApiClien
                 .build();
 
         museumProfileManager = new MuseumProfileManager(museumID, mGoogleApiClient, this);
+
+        reviewList = new ArrayList<Review>();
+        recyclerView = (RecyclerView) findViewById(R.id.rr);
+        rAdapter = new ReviewAdapter(reviewList);
+        RecyclerView.LayoutManager rLayoutManager = new LinearLayoutManager(getApplicationContext());
+        recyclerView.setLayoutManager(rLayoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setAdapter(rAdapter);
     }
 
     @Override
@@ -70,11 +78,8 @@ public class MuseumProfileUI extends AppCompatActivity implements GoogleApiClien
 
     public void onClickExhibition(View view) {
         // listener for the Exhibition button
-
-
-
         Intent intent = new Intent(this, ExhibitionUI.class);
-        String message = "Singapore Art Museum";
+        String message = museumProfileManager.getMuseum().getName();
         // this message means nothing for now
         intent.putExtra(EXTRA_MESSAGE, message);
         startActivity(intent);
@@ -108,18 +113,21 @@ public class MuseumProfileUI extends AppCompatActivity implements GoogleApiClien
 
             TextView website = (TextView) findViewById(R.id.website);
             website.setText("Website: " + museum.getTicketSite());
-            reviewList = museum.getReviewList();
-            recyclerView = (RecyclerView) findViewById(R.id.rr);
 
+            reviewList = museum.getReviewList();
+            for (Review r: reviewList) {
+                Log.e("Review Debug", r.getAuthorName());
+            }
+            recyclerView = (RecyclerView) findViewById(R.id.rr);
             rAdapter = new ReviewAdapter(reviewList);
             RecyclerView.LayoutManager rLayoutManager = new LinearLayoutManager(getApplicationContext());
             recyclerView.setLayoutManager(rLayoutManager);
             recyclerView.setItemAnimator(new DefaultItemAnimator());
             recyclerView.setAdapter(rAdapter);
+            rAdapter.notifyDataSetChanged();
+
             //removes loading spinner
             spinner.setVisibility(View.GONE);
         }
-
     }
-
 }
