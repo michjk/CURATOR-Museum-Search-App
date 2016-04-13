@@ -17,6 +17,7 @@ public class ExhibitionManager {
     private ExhibitionCrawlerInterface crawler;
     private Context context;
 
+
     public ExhibitionManager(ArrayList<Exhibition> exhibitionList, Object adapter, Context context) {
         this.exhibitionList = exhibitionList;
         this.adapter = adapter;

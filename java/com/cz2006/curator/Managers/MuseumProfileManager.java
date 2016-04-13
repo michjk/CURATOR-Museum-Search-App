@@ -1,9 +1,15 @@
 package com.cz2006.curator.Managers;
 
+import android.content.Context;
+import android.util.Log;
+import android.view.View;
+
 import com.cz2006.curator.Crawler.AsyncRespond;
 import com.cz2006.curator.Crawler.MuseumProfileCrawlerInterface;
 import com.cz2006.curator.Crawler.MuseumProfileCrawler;
+import com.cz2006.curator.Dialogs.GenericAlertDialog;
 import com.cz2006.curator.Objects.Museum;
+import com.cz2006.curator.UI.MapUI;
 import com.cz2006.curator.UI.MuseumProfileUI;
 import com.google.android.gms.common.api.GoogleApiClient;
 
@@ -31,7 +37,12 @@ public class MuseumProfileManager {
                 //write code here to program what to do after get museum data
                 //current available data: name, rating, arraylist of opening hours, image, arraylist of review
                 museum = (Museum) output;
-                museumUI.displayData(museum);
+                if (museum != null) museumUI.displayData(museum);
+                else {
+                    Log.e("Museum cannot be null", museum.toString());
+                    GenericAlertDialog genericAlertDialog = new GenericAlertDialog();
+                    genericAlertDialog.show(museumUI.getFragmentManager(), "Selected museum was set to 'null'!");
+                }
             }
         });
 

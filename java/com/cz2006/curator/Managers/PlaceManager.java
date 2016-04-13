@@ -2,6 +2,7 @@ package com.cz2006.curator.Managers;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 
 import com.cz2006.curator.Dialogs.GenericAlertDialog;
 import com.cz2006.curator.R;
@@ -33,8 +34,9 @@ implements OnConnectionFailedListener {
 
     @Override
     public void onConnectionFailed(ConnectionResult connectionResult) {
+        Log.e("PlaceManager", connectionResult.toString());
         GenericAlertDialog genericAlertDialog = new GenericAlertDialog();
-        genericAlertDialog.show(getFragmentManager(), "temp");
+        genericAlertDialog.show(getFragmentManager(), "Connection Failed");
 
     }
 }

@@ -56,12 +56,19 @@
                         android:id="@+id/image"
                         android:adjustViewBounds="true"/>
 
+                    <ProgressBar
+                        android:id="@+id/progressBar1"
+                        style="?android:attr/progressBarStyleLarge"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_gravity="center_horizontal" />
+
                     <TextView
                         style="@style/Base.TextAppearance.AppCompat.Body1"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/description"
-                        android:text="Description of some description here"
                         />
 
                     <TextView
@@ -69,7 +76,6 @@
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/address"
-                        android:text="Address"
                         android:paddingTop="8dp"
                         />
 
@@ -78,7 +84,6 @@
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/opening_hours"
-                        android:text="Opening Hours"
                         android:paddingTop="8dp"
                         />
 
@@ -87,7 +92,6 @@
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/phone"
-                        android:text="Phone No."
                         android:paddingTop="8dp"
                         />
 
@@ -96,7 +100,6 @@
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/email"
-                        android:text="Email"
                         android:paddingTop="8dp"
                         />
 
@@ -105,7 +108,6 @@
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/website"
-                        android:text="Website"
                         android:paddingTop="8dp"
                         android:paddingBottom="8dp"
                         />
@@ -126,6 +128,12 @@
                         style="@style/Base.TextAppearance.AppCompat.Body1"
                         android:text="Book Ticket"
                         android:id="@+id/ticket_button" />
+
+                    <android.support.v7.widget.RecyclerView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/rr">
+                    </android.support.v7.widget.RecyclerView>
 
                 </LinearLayout>
             </ScrollView>

@@ -4,18 +4,23 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.*;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.cz2006.curator.Constants.ExhibitionConstants;
 import com.cz2006.curator.Managers.MuseumProfileManager;
 import com.cz2006.curator.Objects.Museum;
+import com.cz2006.curator.Objects.Review;
 import com.cz2006.curator.R;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.places.Places;
+
+import java.util.ArrayList;
 
 public class MuseumProfileUI extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener{
 
@@ -25,13 +30,21 @@ public class MuseumProfileUI extends AppCompatActivity implements GoogleApiClien
 
     private GoogleApiClient mGoogleApiClient;
 
+    private ProgressBar spinner;
+
+    private ArrayList<Review> reviewList;
+
+    private ReviewAdapter rAdapter;
+
+    private RecyclerView recyclerView;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_museum_profile_ui);
-
         String museumID = getIntent().getStringExtra(EXTRA_MESSAGE);
-
         ExhibitionConstants.setExhibitionConstants(this);
 
         mGoogleApiClient = new GoogleApiClient
@@ -40,7 +53,6 @@ public class MuseumProfileUI extends AppCompatActivity implements GoogleApiClien
                 .addApi(Places.PLACE_DETECTION_API)
                 .enableAutoManage(this, this)
                 .build();
-
 
         museumProfileManager = new MuseumProfileManager(museumID, mGoogleApiClient, this);
     }
@@ -71,6 +83,9 @@ public class MuseumProfileUI extends AppCompatActivity implements GoogleApiClien
     public void displayData(Museum museum) {
 
         String openingHourList = "Opening Hours: \n";
+        //display a loading spinner while data loads
+        spinner = (ProgressBar)findViewById(R.id.progressBar1);
+        spinner.setVisibility(View.VISIBLE);
 
         if (museum != null) {
             TextView title = (TextView) findViewById(R.id.museum_name);
@@ -93,7 +108,18 @@ public class MuseumProfileUI extends AppCompatActivity implements GoogleApiClien
 
             TextView website = (TextView) findViewById(R.id.website);
             website.setText("Website: " + museum.getTicketSite());
+            reviewList = museum.getReviewList();
+            recyclerView = (RecyclerView) findViewById(R.id.rr);
+
+            rAdapter = new ReviewAdapter(reviewList);
+            RecyclerView.LayoutManager rLayoutManager = new LinearLayoutManager(getApplicationContext());
+            recyclerView.setLayoutManager(rLayoutManager);
+            recyclerView.setItemAnimator(new DefaultItemAnimator());
+            recyclerView.setAdapter(rAdapter);
+            //removes loading spinner
+            spinner.setVisibility(View.GONE);
         }
+
     }
 
 }
