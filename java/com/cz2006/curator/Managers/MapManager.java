@@ -51,6 +51,13 @@ public class MapManager {
                         );
                     }
                 }
+
+                for(Place p: placeList) {
+                    Log.e("MapManager", p.getName());
+                    Log.e("MapManager", p.getLat()+"");
+                    Log.e("MapManager", p.getLng()+"");
+                    Log.e("MapManager", p.getPlaceId());
+                }
             }
         });
         crawler.refresh();

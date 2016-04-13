@@ -3,9 +3,6 @@ package com.cz2006.curator.UI;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.location.Criteria;
-import android.location.Location;
-import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -19,7 +16,6 @@ import android.widget.Toast;
 
 import com.cz2006.curator.Managers.MapManager;
 import com.cz2006.curator.Objects.Museum;
-import com.cz2006.curator.Objects.User;
 import com.cz2006.curator.R;
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
@@ -93,8 +89,7 @@ public class MapUI extends AppCompatActivity
             
             
             it.putExtra("museumList",museumList);
-            it.putExtra("userLocation",getUserLocation());
-
+            
             startActivity(it);
             return true;
         }
@@ -137,17 +132,6 @@ public class MapUI extends AppCompatActivity
      * it inside the SupportMapFragment. This method will only be triggered once the user has
      * installed Google Play services and returned to the app.
      */
-
-    public User getUserLocation(){
-        Location loc = mMap.getMyLocation();
-        if(loc!=null){
-            double lat = loc.getLatitude();
-            double lon = loc.getLongitude();
-            return new User(lat,lon);
-        }
-        else return new User(0,0);
-    }
-
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
