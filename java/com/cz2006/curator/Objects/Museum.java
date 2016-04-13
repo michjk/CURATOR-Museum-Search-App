@@ -22,9 +22,10 @@ public class Museum implements Serializable{
     private String description;
     private String ticketSite;
     private ArrayList<Review> reviewList;
+    private String placeID;
     // arraylist of reviews and exhibitions are not implemented yet
 
-    public Museum(String name, double latitude, double longitude, String address, double rating, ArrayList<String> openingHours, String phone, String email, String description, String ticketSite, ArrayList<Review> reviewList, Bitmap image){
+    public Museum(String name, double latitude, double longitude, String address, double rating, ArrayList<String> openingHours, String phone, String email, String description, String ticketSite, ArrayList<Review> reviewList, Bitmap image,String placeID){
         this.name = name;
         this.latitude = latitude;
         this.longitude = longitude;
@@ -37,6 +38,7 @@ public class Museum implements Serializable{
         this.ticketSite = ticketSite;
         this.reviewList = reviewList;
         this.image = image;
+        this.placeID = placeID;
     }
 
 
@@ -55,6 +57,10 @@ public class Museum implements Serializable{
     }
 
     // Here be getter/setters; abandon hope all ye who enter
+
+    public String getPlaceID(){
+        return placeID;
+    }
 
     public String getTicketSite() {
         return ticketSite;

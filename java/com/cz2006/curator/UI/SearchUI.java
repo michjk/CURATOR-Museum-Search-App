@@ -2,6 +2,7 @@ package com.cz2006.curator.UI;
 
 import android.app.SearchManager;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -11,8 +12,11 @@ import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
+import com.cz2006.curator.Managers.ItemClickSupport;
+import com.cz2006.curator.Managers.MapManager;
 import com.cz2006.curator.Managers.SearchEngine;
 import com.cz2006.curator.Objects.Museum;
 import com.cz2006.curator.R;
@@ -26,6 +30,8 @@ public class SearchUI extends AppCompatActivity implements SearchView.OnQueryTex
     private List<Museum> museums;
     private SearchEngine engine;
     private Context context;
+
+    public final static String EXTRA_MESSAGE = "com.cz2006.curator.MESSAGE";
 
     @Override
     protected void onCreate(Bundle saved){
@@ -44,6 +50,15 @@ public class SearchUI extends AppCompatActivity implements SearchView.OnQueryTex
         }
         adapter = new SearchAdapter(museums);
         rv.setAdapter(adapter);
+
+        ItemClickSupport.addTo(rv).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
+            @Override
+            public void onItemClicked(RecyclerView recyclerView, int position, View v) {
+                Intent it = new Intent(getApplicationContext(),MuseumProfileUI.class);
+                it.putExtra(EXTRA_MESSAGE,museums.get(position).getPlaceID());
+                startActivity(it);
+            }
+        });
 
     }
 

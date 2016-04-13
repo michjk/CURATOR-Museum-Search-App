@@ -126,7 +126,7 @@ public class MuseumProfileCrawler extends AsyncTask<String, Void, Museum> implem
                 Log.e("MuseumProfileError", e.getMessage());
             }
             museum = new Museum(
-              name, 0.0, 0.0, address, rating, openingHours, phone, null, null, museumUrl, reviewList, image
+              name, 0.0, 0.0, address, rating, openingHours, phone, null, null, museumUrl, reviewList, image,""
             );
         }
 

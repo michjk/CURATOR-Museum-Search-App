@@ -30,7 +30,7 @@ public class MapManager {
         if(placeList == null) return null;
         ArrayList<Museum> arr = new ArrayList<Museum>();
         for(Place p:placeList){
-            arr.add(new Museum(p.getName(),p.getLat(),p.getLng(),"",0.0,null,"","","","",null,null));
+            arr.add(new Museum(p.getName(),p.getLat(),p.getLng(),"",0.0,null,"","","","",null,null,p.getPlaceId()));
         }
         return arr;
     }
