@@ -1,9 +1,11 @@
 package com.cz2006.curator.Objects;
 
+import java.io.Serializable;
+
 /**
  * Created by Vicson on 18/3/2016.
  */
-public class User {
+public class User implements Serializable {
 
     private double latitude;
     private double longitude;
