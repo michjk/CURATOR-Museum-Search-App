@@ -14,7 +14,6 @@ import com.google.android.gms.location.places.PlacePhotoMetadataResult;
 import com.google.android.gms.location.places.Places;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedInputStream;
@@ -60,7 +59,7 @@ public class MuseumProfileCrawler extends AsyncTask<String, Void, Museum> implem
         JSONObject result = null;
         String address = null;
         String phone = null;
-        Double rating = null;
+        Double rating = 0.0;
         String name = null;
         JSONObject openingHoursObject = null;
         JSONArray weekdayText = null;
@@ -72,61 +71,84 @@ public class MuseumProfileCrawler extends AsyncTask<String, Void, Museum> implem
 
 
         if(jsonStr != null) {
-            Log.e("MuseumProfileCrawler", jsonStr);
             try {
                 jsonObject = new JSONObject(jsonStr);
-                result = jsonObject.getJSONObject("result");
-                address = result.getString("formatted_address");
-                phone = result.getString("formatted_phone_number");
-                rating = result.getDouble("rating");
-                name = result.getString("name");
-                openingHoursObject = result.getJSONObject("opening_hours");
-                weekdayText = openingHoursObject.getJSONArray("weekday_text");
-                openingHours = new ArrayList<>();
-
-                for(int i = 0; i < weekdayText.length(); i++) {
-                    openingHours.add(weekdayText.getString(i));
-                }
-
-                image = getImage();
-
-                reviews = result.getJSONArray("reviews");
-                reviewList = new ArrayList<>();
-
-                for(int i = 0; i < reviews.length(); i++) {
-                    JSONObject review = reviews.getJSONObject(i);
-
-                    String authorName = review.getString("author_name");
-                    Double ratingReview = review.getDouble("rating");
-                    String text = review.getString("text");
-
-                    long dateInSecond = review.getLong("time");
-                    Calendar calendar = Calendar.getInstance();
-                    calendar.setTimeInMillis(dateInSecond*1000);
-                    Date date = calendar.getTime();
-
-                    reviewList.add(new Review(
-                       authorName, date, ratingReview, text
-                    ));
-                }
-
-                museumUrl = result.getString("website");
-
-
-                Log.e("MuseumProfileCrawler", name);
-                Log.e("MuseumProfileCrawler", address);
-                Log.e("MuseumProfileCrawler", phone);
-                Log.e("MuseumProfileCrawler", rating + "");
-                Log.e("MuseumProfileCrawler", openingHours.get(0));
-                Log.e("MuseumProfileCrawler", image.getHeight()+"" );
-                Log.e("MuseumProfileCrawler", reviewList.toString());
-                Log.e("MuseumProfileCrawler", museumUrl);
-
-            }catch(JSONException e) {
-                Log.e("MuseumProfileError", e.getMessage());
+            } catch(Exception e) {
+                jsonObject = null;
             }
+            result = getJsonObject(jsonObject, "result");
+
+            address = getString(result, "formatted_address");
+            phone = getString(result, "formatted_phone_number");
+            rating = getDouble(result, "rating");
+            name = getString(result, "name");
+            openingHoursObject = getJsonObject(result, "opening_hours");
+            weekdayText = getJsonArray(openingHoursObject, "weekday_text");
+            openingHours = new ArrayList<>();
+
+            int openingLength = 0;
+
+            if(weekdayText != null) {
+                openingLength = weekdayText.length();
+            }
+
+            for(int i = 0; i < openingLength; i++) {
+                openingHours.add(getString(weekdayText, i));
+            }
+
+            image = getImage();
+
+            reviews = getJsonArray(result, "reviews");
+            reviewList = new ArrayList<>();
+
+            int reviewLength = 0;
+            if(reviews != null) {
+                reviewLength = reviews.length();
+            }
+
+            for(int i = 0; i < reviewLength; i++) {
+                    JSONObject review = getJsonObject(reviews, i);
+
+                    String authorName = getString(review, "author_name");
+                    Double ratingReview = getDouble(review, "rating");
+                    String text = getString(review, "text");
+
+                    Long dateInSecond = getLong(review,"time");
+                    Calendar calendar = Calendar.getInstance();
+                    Date date = null;
+                    if(dateInSecond == null) {
+                        calendar.setTimeInMillis(dateInSecond*1000);
+                        date = calendar.getTime();
+                    }
+
+                    reviewList.add(new Review(authorName, date, ratingReview, text
+                        ));
+            }
+
+            museumUrl = getString(result, "website");
+
+
+            Log.e("MuseumProfileCrawler", name);
+            Log.e("MuseumProfileCrawler", address);
+            Log.e("MuseumProfileCrawler", phone);
+            Log.e("MuseumProfileCrawler", rating + "");
+            //Log.e("MuseumProfileCrawler", openingHours.get(0));
+//            Log.e("MuseumProfileCrawler", image.getHeight()+"" );
+            Log.e("MuseumProfileCrawler", reviewList.toString());
+            Log.e("MuseumProfileCrawler", museumUrl);
+
+            if(rating == null)
+                rating = 0.0;
+
             museum = new Museum(
-              name, 0.0, 0.0, address, rating, openingHours, phone, null, null, museumUrl, reviewList, image,""
+                    name,
+                    0.0,
+                    0.0,
+                    address,
+                    rating,
+                    openingHours,
+                    phone
+                    , "", "", museumUrl, reviewList, image,""
             );
         }
 
@@ -189,6 +211,62 @@ public class MuseumProfileCrawler extends AsyncTask<String, Void, Museum> implem
         }
 
         return photoBitmap;
+    }
+
+    private JSONObject getJsonObject(JSONObject jsonObject, String s) {
+       try {
+           return jsonObject.getJSONObject(s);
+       }catch (Exception e) {
+           return null;
+       }
+    }
+
+    private JSONArray getJsonArray(JSONObject jsonObject, String s) {
+        try {
+            return jsonObject.getJSONArray(s);
+        } catch(Exception e) {
+            return null;
+        }
+    }
+
+    private String getString(JSONObject jsonObject, String s) {
+        try {
+            return jsonObject.getString(s);
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    private Double getDouble(JSONObject jsonObject, String s) {
+        try {
+            return jsonObject.getDouble(s);
+        }catch (Exception e) {
+            return null;
+        }
+    }
+
+    private String getString(JSONArray jsonArray, int i) {
+        try {
+            return jsonArray.getString(i);
+        }catch (Exception e) {
+            return null;
+        }
+    }
+
+    private  JSONObject getJsonObject(JSONArray jsonArray, int i) {
+        try {
+            return jsonArray.getJSONObject(i);
+        } catch(Exception e) {
+            return null;
+        }
+    }
+
+    private Long getLong(JSONObject jsonObject, String s) {
+        try {
+            return jsonObject.getLong(s);
+        }catch(Exception e) {
+            return null;
+        }
     }
 
 }

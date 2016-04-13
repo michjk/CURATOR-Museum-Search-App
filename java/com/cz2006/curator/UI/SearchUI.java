@@ -19,6 +19,7 @@ import com.cz2006.curator.Managers.ItemClickSupport;
 import com.cz2006.curator.Managers.MapManager;
 import com.cz2006.curator.Managers.SearchEngine;
 import com.cz2006.curator.Objects.Museum;
+import com.cz2006.curator.Objects.User;
 import com.cz2006.curator.R;
 
 import java.util.ArrayList;
@@ -27,8 +28,7 @@ import java.util.List;
 public class SearchUI extends AppCompatActivity implements SearchView.OnQueryTextListener{
     private RecyclerView rv;
     private SearchAdapter adapter;
-    private List<Museum> museums;
-    private SearchEngine engine;
+    private ArrayList<Museum> museums;
     private Context context;
 
     public final static String EXTRA_MESSAGE = "com.cz2006.curator.MESSAGE";
@@ -41,8 +41,9 @@ public class SearchUI extends AppCompatActivity implements SearchView.OnQueryTex
         rv = (RecyclerView)findViewById(R.id.resultsList);
         rv.setLayoutManager(new LinearLayoutManager(this));
 
-
-		museums = (ArrayList<Museum>) getIntent().getSerializableExtra("museumList");
+        User userLoc = (User) getIntent().getSerializableExtra("userLocation");
+        museums = (ArrayList<Museum>) getIntent().getSerializableExtra("museumList");
+		museums = (new SearchEngine(museums,userLoc)).byProximity();
 
         if(museums == null){
             Log.e("ERROR","museums are null");
