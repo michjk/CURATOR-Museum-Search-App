@@ -14,7 +14,7 @@ public class Museum implements Serializable{
     private double latitude;
     private double longitude;
     private String address;
-    private Double rating;
+    private double rating;
     private ArrayList<String> openingHours;
     private Bitmap image;
     private String phone;
