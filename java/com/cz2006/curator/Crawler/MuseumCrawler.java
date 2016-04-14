@@ -31,13 +31,13 @@ import java.util.Date;
 /**
  * Created by Acceleration on 09/04/2016.
  */
-public class MuseumProfileCrawler extends AsyncTask<String, Void, Museum> implements MuseumProfileCrawlerInterface {
+public class MuseumCrawler extends AsyncTask<String, Void, Museum> implements MuseumCrawlerInterface {
 
     public AsyncRespond asyncRespond;
     private GoogleApiClient mGoogleApiClient;
     private String placeId;
 
-    public MuseumProfileCrawler(String placeId, GoogleApiClient mGoogleApiClient, AsyncRespond asyncRespond) {
+    public MuseumCrawler(String placeId, GoogleApiClient mGoogleApiClient, AsyncRespond asyncRespond) {
         this.asyncRespond = asyncRespond;
         this.placeId = placeId;
         this.mGoogleApiClient = mGoogleApiClient;
@@ -128,14 +128,14 @@ public class MuseumProfileCrawler extends AsyncTask<String, Void, Museum> implem
             museumUrl = getString(result, "website");
 
 
-            Log.e("MuseumProfileCrawler", name);
-            Log.e("MuseumProfileCrawler", address);
-            Log.e("MuseumProfileCrawler", phone);
-            Log.e("MuseumProfileCrawler", rating + "");
-            //Log.e("MuseumProfileCrawler", openingHours.get(0));
-//            Log.e("MuseumProfileCrawler", image.getHeight()+"" );
-            Log.e("MuseumProfileCrawler", reviewList.toString());
-            Log.e("MuseumProfileCrawler", museumUrl);
+            Log.e("MuseumCrawler", name);
+            Log.e("MuseumCrawler", address);
+            Log.e("MuseumCrawler", phone);
+            Log.e("MuseumCrawler", rating + "");
+            //Log.e("MuseumCrawler", openingHours.get(0));
+//            Log.e("MuseumCrawler", image.getHeight()+"" );
+            Log.e("MuseumCrawler", reviewList.toString());
+            Log.e("MuseumCrawler", museumUrl);
 
             if(rating == null)
                 rating = 0.0;
@@ -185,11 +185,11 @@ public class MuseumProfileCrawler extends AsyncTask<String, Void, Museum> implem
             json = sb.toString();
 
         } catch (UnsupportedEncodingException e) {
-            Log.e("MuseumProfileCrawler", e.getMessage());
+            Log.e("MuseumCrawler", e.getMessage());
         } catch (IOException e) {
-            Log.e("MuseumProfileCrawler", e.getMessage());
+            Log.e("MuseumCrawler", e.getMessage());
         } catch (Exception e) {
-            Log.e("MuseumProfileCrawler", e.getMessage());
+            Log.e("MuseumCrawler", e.getMessage());
         }
         // return json
         return json;

@@ -1,34 +1,31 @@
 package com.cz2006.curator.Managers;
 
-import android.content.Context;
 import android.util.Log;
-import android.view.View;
 
 import com.cz2006.curator.Crawler.AsyncRespond;
-import com.cz2006.curator.Crawler.MuseumProfileCrawlerInterface;
-import com.cz2006.curator.Crawler.MuseumProfileCrawler;
+import com.cz2006.curator.Crawler.MuseumCrawlerInterface;
+import com.cz2006.curator.Crawler.MuseumCrawler;
 import com.cz2006.curator.Dialogs.GenericAlertDialog;
 import com.cz2006.curator.Objects.Museum;
-import com.cz2006.curator.UI.MapUI;
-import com.cz2006.curator.UI.MuseumProfileUI;
+import com.cz2006.curator.UI.MuseumUI;
 import com.google.android.gms.common.api.GoogleApiClient;
 
 /**
  * Created by Acceleration on 10/04/2016.
  */
-public class MuseumProfileManager {
+public class MuseumManager {
 
-    private MuseumProfileCrawlerInterface crawler;
+    private MuseumCrawlerInterface crawler;
     private String placeId;
     private GoogleApiClient mGoogleApiClient;
-    private MuseumProfileUI museumUI;
+    private MuseumUI museumUI;
     private Museum museum;
 
     public Museum getMuseum() {
         return museum;
     }
 
-    public MuseumProfileManager(String placeId, GoogleApiClient mGoogleApiClient, MuseumProfileUI ui) {
+    public MuseumManager(String placeId, GoogleApiClient mGoogleApiClient, MuseumUI ui) {
         this.placeId = placeId;
         this.mGoogleApiClient = mGoogleApiClient;
         this.museumUI = ui;
@@ -36,7 +33,7 @@ public class MuseumProfileManager {
 
     public void refresh() {
         Log.e("is place still here", placeId.toString());
-        crawler = new MuseumProfileCrawler(placeId, mGoogleApiClient, new AsyncRespond() {
+        crawler = new MuseumCrawler(placeId, mGoogleApiClient, new AsyncRespond() {
             @Override
             public void processFinish(Object output) {
                 //write code here to program what to do after get museum data

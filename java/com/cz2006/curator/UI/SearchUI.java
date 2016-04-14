@@ -23,7 +23,6 @@ import com.cz2006.curator.Objects.User;
 import com.cz2006.curator.R;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class SearchUI extends AppCompatActivity implements SearchView.OnQueryTextListener{
     private RecyclerView rv;
@@ -69,7 +68,7 @@ public class SearchUI extends AppCompatActivity implements SearchView.OnQueryTex
                         break;
                     }
                 }
-                Intent it = new Intent(getApplicationContext(),MuseumProfileUI.class);
+                Intent it = new Intent(getApplicationContext(),MuseumUI.class);
                 it.putExtra(EXTRA_MESSAGE,id);
                 startActivity(it);
             }
