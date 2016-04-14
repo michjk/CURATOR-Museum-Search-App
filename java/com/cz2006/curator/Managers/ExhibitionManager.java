@@ -44,6 +44,7 @@ public class ExhibitionManager {
             Log.e("hello", crawler.toString());
         }
 
+        spinner.setVisibility(View.VISIBLE);
         crawler.setAsyncRespond(new AsyncRespond() {
             @Override
             public void processFinish(Object output) {

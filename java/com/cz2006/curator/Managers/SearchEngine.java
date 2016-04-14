@@ -1,16 +1,11 @@
 package com.cz2006.curator.Managers;
 
-import android.os.Environment;
-import android.util.Log;
-
 import com.cz2006.curator.Objects.Museum;
-import com.cz2006.curator.Objects.Place;
 import com.cz2006.curator.Objects.User;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.ObjectInputStream;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class SearchEngine{
     //attribute(s)
@@ -32,18 +27,6 @@ public class SearchEngine{
 
     public void setResult(ArrayList<Museum> result) {
         this.result = result;
-    }
-
-    //methods
-
-    //TODO make this work
-    public ArrayList<Museum> search() {
-        if(result.size() == 0) {
-            //for (int i = 1; i <= 20; i++)
-            //    result.add(new Museum(i));
-
-        }
-        return result;
     }
 
     public ArrayList<Museum> byProximity() {
