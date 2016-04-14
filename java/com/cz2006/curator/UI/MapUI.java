@@ -13,7 +13,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import com.cz2006.curator.Managers.MapManager;
 import com.cz2006.curator.Objects.Museum;
@@ -29,16 +28,14 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
-import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.maps.android.kml.KmlContainer;
 import com.google.maps.android.kml.KmlLayer;
 import com.google.maps.android.kml.KmlPlacemark;
 import com.google.maps.android.kml.KmlPolygon;
 
-import org.xmlpull.v1.XmlPullParserException;
-
-import java.io.IOException;
 import java.util.ArrayList;
+
+//import android.widget.Toast;
 
 public class MapUI extends AppCompatActivity
         implements
@@ -52,16 +49,10 @@ public class MapUI extends AppCompatActivity
     private boolean mPermissionDenied = false;
 
     private GoogleMap mMap;
-    private KmlLayer kl;
+    //private KmlLayer kl;
     private MapManager mapManager;
-
     private ArrayList<Museum> museumList;
-    /**
-     * ATTENTION: This was auto-generated to implement the App Indexing API.
-     * See https://g.co/AppIndexing/AndroidStudio for more information.
-     */
     private GoogleApiClient client;
-
     public final static String EXTRA_MESSAGE = "com.cz2006.curator.MESSAGE";
 
     @Override
@@ -123,40 +114,22 @@ public class MapUI extends AppCompatActivity
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
-
-
-
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        Log.e("sadma","eadfdf");
+        Log.e("resuming","please wait...");
         //mapManager.refresh(mMap);
     }
 
-    /**
-     * Manipulates the map once available.
-     * This callback is triggered when the map is ready to be used.
-     * This is where we can add markers or lines, add listeners or move the camera. In this case,
-     * we just add a marker near Sydney, Australia.
-     * If Google Play services is not installed on the device, the user will be prompted to install
-     * it inside the SupportMapFragment. This method will only be triggered once the user has
-     * installed Google Play services and returned to the app.
-     */
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
         mMap.setOnMyLocationButtonClickListener(this);
         enableMyLocation();
-        // Add a marker in Sydney and move the camera
-        //LatLng sydney = new LatLng(-34, 151);
-        //mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        //mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
 
         mMap.setOnInfoWindowClickListener(this);
         mapManager = new MapManager(mMap);
@@ -224,13 +197,11 @@ public class MapUI extends AppCompatActivity
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client.connect();
         Action viewAction = Action.newAction(
-                Action.TYPE_VIEW, // TODO: choose an action type.
-                "MapUI Page", // TODO: Define a title for the content shown.
-                // TODO: If you have web page content that matches this app activity's content,
+                Action.TYPE_VIEW,
+                "MapUI Page",
                 // make sure this auto-generated web page URL is correct.
                 // Otherwise, set the URL to null.
                 Uri.parse("http://host/path"),
-                // TODO: Make sure this auto-generated app deep link URI is correct.
                 Uri.parse("android-app://com.cz2006.curator/http/host/path")
         );
         AppIndex.AppIndexApi.start(client, viewAction);
@@ -240,16 +211,12 @@ public class MapUI extends AppCompatActivity
     public void onStop() {
         super.onStop();
 
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
         Action viewAction = Action.newAction(
-                Action.TYPE_VIEW, // TODO: choose an action type.
-                "MapUI Page", // TODO: Define a title for the content shown.
-                // TODO: If you have web page content that matches this app activity's content,
+                Action.TYPE_VIEW,
+                "MapUI Page",
                 // make sure this auto-generated web page URL is correct.
                 // Otherwise, set the URL to null.
                 Uri.parse("http://host/path"),
-                // TODO: Make sure this auto-generated app deep link URI is correct.
                 Uri.parse("android-app://com.cz2006.curator/http/host/path")
         );
         AppIndex.AppIndexApi.end(client, viewAction);
@@ -258,7 +225,7 @@ public class MapUI extends AppCompatActivity
 
     @Override
     public boolean onMyLocationButtonClick() {
-        Toast.makeText(this, "MyLocation button clicked", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "MyLocation button clicked", Toast.LENGTH_SHORT).show();
         // Return false so that we don't consume the event and the default behavior still occurs
         // (the camera animates to the user's current position).
         return false;
@@ -266,7 +233,6 @@ public class MapUI extends AppCompatActivity
 
     @Override
     public void onInfoWindowClick(final Marker marker) {
-
         Intent intent = new Intent(this, MuseumProfileUI.class);
         String message = mapManager.findID(marker.getTitle());
         // Name should be placed in title

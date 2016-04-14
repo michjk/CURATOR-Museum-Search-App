@@ -36,7 +36,7 @@ public class MapManager {
     }
 
     public void refresh() {
-        Log.e("adda","adjaiodf");
+        Log.e("refreshing", "please wait...");
         crawler = new PlaceCrawler(new AsyncRespond() {
             @Override
             public void processFinish(Object output) {
