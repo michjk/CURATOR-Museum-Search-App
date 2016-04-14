@@ -76,13 +76,16 @@ public class MapUI extends AppCompatActivity
         if(id == R.id.action_search){
             Intent it = new Intent(this,SearchUI.class);
 
-            while(museumList == null || museumList.size() == 0){
+            if(museumList == null || museumList.size() == 0){
                 mapManager.refresh();
                 museumList = mapManager.getMuseumList();
             }
 
             Log.e("MapUI","Passing museumList");
-            if(museumList == null || museumList.size() == 0) Log.e("WARNING","still null");
+            if(museumList == null || museumList.size() == 0){
+                Log.e("WARNING","still null");
+                return true;
+            }
             else Log.e("WARNING","GOOD JOB");
             int i = 0;
             for(Museum m:museumList){
