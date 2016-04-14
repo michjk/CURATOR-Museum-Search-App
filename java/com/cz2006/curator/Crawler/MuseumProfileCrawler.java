@@ -114,14 +114,12 @@ public class MuseumProfileCrawler extends AsyncTask<String, Void, Museum> implem
                 String text = getString(review, "text");
 
                 Long dateInSecond = getLong(review,"time");
-
                 Calendar calendar = Calendar.getInstance();
                 Date date = null;
                 if(dateInSecond != null) {
                     calendar.setTimeInMillis(dateInSecond*1000);
                     date = calendar.getTime();
                 }
-
 
                 reviewList.add(new Review(authorName, date, ratingReview, text
                 ));

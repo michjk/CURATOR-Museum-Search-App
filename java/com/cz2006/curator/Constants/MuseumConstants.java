@@ -13,5 +13,9 @@ public class MuseumConstants {
     private static final String API_KEY = "AIzaSyBDt3csb4pRV8WakW3IXOd-d9HpgiADJAc";
 
     public static String URL = "https://maps.googleapis.com/maps/api/place/details/json?key=" + API_KEY + "&placeid=";
-
+    public static final String KEY_ITEM = "result"; // parent node
+    public static final String KEY_ID = "place_id";
+    public static final String KEY_NAME = "name";
+    public static final String KEY_LAT = "lat";
+    public static final String KEY_LNG = "lng";
 }
