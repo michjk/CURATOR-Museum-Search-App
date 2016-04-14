@@ -4,6 +4,7 @@ xmlns:card_view="http://schemas.android.com/apk/res-auto"
 android:layout_width="match_parent"
 android:layout_height="match_parent"
 android:orientation="vertical"
+android:background="#eee"
     >
 
 <android.support.v7.widget.CardView
@@ -11,7 +12,7 @@ android:orientation="vertical"
     android:layout_height="wrap_content"
     card_view:contentPadding="16dp"
     card_view:cardElevation="2dp"
-    card_view:cardCornerRadius="5dp"
+    card_view:cardCornerRadius="1dp"
     card_view:cardBackgroundColor="@android:color/holo_blue_light">
 
     <LinearLayout
@@ -35,18 +36,19 @@ android:orientation="vertical"
 <android.support.v7.widget.CardView
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    card_view:contentPadding="16dp"
     card_view:cardElevation="2dp"
-    card_view:cardCornerRadius="5dp">
+    card_view:cardCornerRadius="1dp"
+    android:layout_margin="6dp">
 
     <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
+            android:padding="16dp"
             >
 
             <ImageView

@@ -5,15 +5,15 @@
     android:layout_height="wrap_content"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:paddingLeft="4dp"
-    android:paddingRight="4dp">
+    android:paddingLeft="6dp"
+    android:paddingRight="6dp"
+    android:layout_marginBottom="3dp">
 
     <android.support.v7.widget.CardView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="1dp"
         card_view:contentPadding="16dp"
-        card_view:cardElevation="1dp"
+        card_view:cardElevation="2dp"
         card_view:cardCornerRadius="1dp"
         card_view:cardUseCompatPadding="true">
         <LinearLayout
