@@ -11,7 +11,7 @@ import com.cz2006.curator.Crawler.ExhibitionCrawlerInterface;
  */
 public class ExhibitionDataFactory {
 
-    public static String packageName = "com.cz2006.curator.Crawler.";
+    public static final String packageName = "com.cz2006.curator.Crawler.";
 
     public static ExhibitionCrawlerInterface getExhibitionCrawler(String exhibitionOption, Context context) {
 
@@ -20,8 +20,7 @@ public class ExhibitionDataFactory {
         try {
             String name = ExhibitionConstants.exhibitionClass.get(exhibitionOption);
 
-            String packageName = "com.cz2006.curator";
-            String className = "com.cz2006.curator.Crawler." + name;
+            String className = packageName + name;
 
 
             Log.e("classname", exhibitionOption + " " + name);
@@ -34,18 +33,6 @@ public class ExhibitionDataFactory {
 
             Log.e("exhibitionCraw", exhibitionCrawlerImpl.toString());
 
-
-            /*
-
-            String apkName = context.getPackageManager().getApplicationInfo(packageName, 0).sourceDir;
-            PathClassLoader myClassLoader =
-                    new dalvik.system.PathClassLoader(
-                            apkName,
-                            ClassLoader.getSystemClassLoader());
-            Class handler = Class.forName(className, true, myClassLoader);
-
-            exhibitionCrawler = (ExhibitionCrawlerInterface) handler.newInstance();
-            */
 
         } catch(Exception e) {
             Log.e("Exception", e.getMessage());

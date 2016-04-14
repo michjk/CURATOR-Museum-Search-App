@@ -133,8 +133,6 @@ public class PlaceCrawler extends AsyncTask<String, Void, ArrayList<Place>> impl
 
             InputSource is = new InputSource();
 
-            Log.e("test", xml);
-
             is.setCharacterStream(new StringReader(xml));
             doc = db.parse(is);
 

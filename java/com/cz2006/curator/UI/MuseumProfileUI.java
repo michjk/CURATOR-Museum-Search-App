@@ -1,10 +1,10 @@
 package com.cz2006.curator.UI;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.*;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -35,6 +35,9 @@ public class MuseumProfileUI extends AppCompatActivity implements GoogleApiClien
 
     private ArrayList<Review> reviewList;
 
+    private Button reviewButton;
+
+    private Button exhibitionButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,10 +116,24 @@ public class MuseumProfileUI extends AppCompatActivity implements GoogleApiClien
 
             reviewList = museum.getReviewList();
 
-            Button button = (Button)findViewById(R.id.exhibit_button);
-            button.setClickable(true);
-            button = (Button)findViewById(R.id.review_button);
-            button.setClickable(true);
+            exhibitionButton = (Button)findViewById(R.id.exhibit_button);
+            exhibitionButton.setClickable(false);
+            exhibitionButton.setTextColor(Color.parseColor("grey"));
+
+            reviewButton = (Button)findViewById(R.id.review_button);
+            reviewButton.setClickable(false);
+            reviewButton.setTextColor(Color.parseColor("grey"));
+
+            ExhibitionConstants.setExhibitionConstants(this);
+            if(ExhibitionConstants.exhibitionClass.containsKey(museum.getName())) {
+                exhibitionButton.setClickable(true);
+                exhibitionButton.setTextColor(Color.parseColor("black"));
+            }
+
+            if(!reviewList.isEmpty()) {
+                reviewButton.setClickable(true);
+                reviewButton.setTextColor(Color.parseColor("black"));
+            }
 
             //removes loading spinner
             spinner.setVisibility(View.GONE);

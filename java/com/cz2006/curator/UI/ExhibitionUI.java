@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
 import android.widget.ProgressBar;
 
 import com.cz2006.curator.Managers.ExhibitionManager;
@@ -15,18 +14,21 @@ import java.util.ArrayList;
 
 public class ExhibitionUI extends AppCompatActivity {
 
-    private RecyclerView rv;
-    private LinearLayoutManager llm;
-    private ArrayList<Exhibition> exhibitionList;
-    private ExhibitionAdapter adapter;
-    private String museumName;
-    private ExhibitionManager exhibitionManager;
-    private ProgressBar spinner;
-    /**
-     * ATTENTION: This was auto-generated to implement the App Indexing API.
-     * See https://g.co/AppIndexing/AndroidStudio for more information.
-     */
+    private final static String EXTRA_MESSAGE = "com.cz2006.curator.MESSAGE";
 
+    private RecyclerView rv;
+
+    private LinearLayoutManager llm;
+
+    private ArrayList<Exhibition> exhibitionList;
+
+    private ExhibitionAdapter adapter;
+
+    private String museumName;
+
+    private ExhibitionManager exhibitionManager;
+
+    private ProgressBar spinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +53,9 @@ public class ExhibitionUI extends AppCompatActivity {
         adapter = new ExhibitionAdapter(exhibitionList);
         rv.setAdapter(adapter);
 
-        exhibitionManager = new ExhibitionManager(exhibitionList, adapter, this, spinner);
+        museumName = getIntent().getStringExtra(EXTRA_MESSAGE);
+
+        exhibitionManager = new ExhibitionManager(exhibitionList, adapter, this, spinner, museumName);
         //spinner.setVisibility(View.GONE);
     }
 

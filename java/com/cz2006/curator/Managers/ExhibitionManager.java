@@ -22,17 +22,19 @@ public class ExhibitionManager {
     private ExhibitionCrawlerInterface crawler;
     private Context context;
     private ProgressBar spinner;
+    private String museumName;
 
 
-    public ExhibitionManager(ArrayList<Exhibition> exhibitionList, Object adapter, Context context, ProgressBar spinner) {
+    public ExhibitionManager(ArrayList<Exhibition> exhibitionList, Object adapter, Context context, ProgressBar spinner, String museumName) {
         this.exhibitionList = exhibitionList;
         this.adapter = adapter;
         this.context = context;
         this.spinner = spinner;
+        this.museumName = museumName;
     }
 
     public void refresh() {
-        crawler = ExhibitionDataFactory.getExhibitionCrawler("National Museum", context);
+        crawler = ExhibitionDataFactory.getExhibitionCrawler(museumName, context);
         //crawler.setExhibitionList(exhibitionList);
         //crawler.setAdapter(adapter);
 
