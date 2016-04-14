@@ -1,7 +1,10 @@
 package com.cz2006.curator.Managers;
 
 import android.content.Context;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 
+import com.cz2006.curator.Crawler.AsyncRespond;
 import com.cz2006.curator.Crawler.ExhibitionCrawlerInterface;
 import com.cz2006.curator.Objects.Exhibition;
 
@@ -25,13 +28,26 @@ public class ExhibitionManager {
     }
 
     public void refresh() {
-        crawler = ExhibitionDataFactory.getExhibitionCrawler("Singapore Art Museum", context);
+        crawler = ExhibitionDataFactory.getExhibitionCrawler("National Museum", context);
+        //crawler.setExhibitionList(exhibitionList);
+        //crawler.setAdapter(adapter);
 
-        //Object object = new SingaporeArtMuseumCrawler();
+        if(crawler == null) {
+            Log.e("hello", crawler.toString());
+        }
 
-        //crawler = new SingaporeArtMuseumCrawler();
-        crawler.setExhibitionList(exhibitionList);
-        crawler.setAdapter(adapter);
+        crawler.setAsyncRespond(new AsyncRespond() {
+            @Override
+            public void processFinish(Object output) {
+                exhibitionList.clear();
+                ArrayList<Exhibition> tmpList = (ArrayList<Exhibition>) output;
+                for(Exhibition exhibition: tmpList) {
+                    exhibitionList.add(exhibition);
+                }
+                ((RecyclerView.Adapter)adapter).notifyDataSetChanged();
+            }
+        });
+
         crawler.refresh();
     }
 }

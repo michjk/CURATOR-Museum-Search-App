@@ -43,7 +43,7 @@ public class ExhibitionConstants {
                 String museumName = line;
                 line = reader.readLine();
                 String museumClass =  line;
-                line = reader.readLine();
+                //line = reader.readLine();
                 String url = reader.readLine();
 
                 Log.e("Museum", museumName + museumClass + url);

@@ -12,20 +12,25 @@ import java.util.ArrayList;
 public abstract class ExhibitionCrawlerTemplate extends AsyncTask<Void,Void,Void> implements ExhibitionCrawlerInterface {
     //array list that contains list of exhibiton that has been crawled
     protected ArrayList<Exhibition> exhibitionList;
-    protected Object adapter;
+    public AsyncRespond asyncRespond;
+    //protected Object adapter;
 
     protected ExhibitionCrawlerTemplate() {
-        exhibitionList = null;
-        adapter = null;
+        exhibitionList = new ArrayList<>();
+        //adapter = null;
     }
 
-    public void setAdapter(Object adapter) {
+    public void setAsyncRespond(AsyncRespond asyncRespond) {
+        this.asyncRespond = asyncRespond;
+    }
+
+    /*public void setAdapter(Object adapter) {
         this.adapter = adapter;
-    }
+    }*/
 
-    public void setExhibitionList(ArrayList<Exhibition> exhibitionList) {
+    /*public void setExhibitionList(ArrayList<Exhibition> exhibitionList) {
         this.exhibitionList = exhibitionList;
-    }
+    }*/
 
     public void refresh() {
         this.execute();

@@ -1,6 +1,5 @@
 package com.cz2006.curator.Crawler;
 
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
 import com.cz2006.curator.Objects.Exhibition;
@@ -43,7 +42,8 @@ public class NationalMuseumCrawler extends ExhibitionCrawlerTemplate  {
 
     @Override
     protected void onPostExecute(Void v) {
-        ((RecyclerView.Adapter)adapter).notifyDataSetChanged();
+        //((RecyclerView.Adapter)adapter).notifyDataSetChanged();
+        asyncRespond.processFinish(exhibitionList);
     }
 
     @Override

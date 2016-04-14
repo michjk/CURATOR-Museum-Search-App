@@ -2,7 +2,6 @@ package com.cz2006.curator.Crawler;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
 import com.cz2006.curator.Objects.Exhibition;
@@ -68,7 +67,8 @@ public class SingaporeArtMuseumCrawler extends ExhibitionCrawlerTemplate {
 
     @Override
     protected void onPostExecute(Void aVoid) {
-        ((RecyclerView.Adapter)adapter).notifyDataSetChanged();
+        //((RecyclerView.Adapter)adapter).notifyDataSetChanged();
+        asyncRespond.processFinish(exhibitionList);
     }
 
     protected String getName(Object element) {
