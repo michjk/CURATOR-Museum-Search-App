@@ -44,12 +44,14 @@
 					android:id="@+id/review_score"
 				/>
 				-->
+
 				<RatingBar
+					style="@style/Base.Widget.AppCompat.RatingBar.Small"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:rating="0"
 					android:id="@+id/review_score"
-					style="@style/Base.Widget.AppCompat.RatingBar.Small"/>
+					/>
 				
 				<TextView
 					style="@style/Base.TextAppearance.AppCompat.Body1"

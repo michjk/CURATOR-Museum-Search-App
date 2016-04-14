@@ -3,8 +3,6 @@ package com.cz2006.curator.Managers;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.View;
-import android.widget.ProgressBar;
 
 import com.cz2006.curator.Crawler.AsyncRespond;
 import com.cz2006.curator.Crawler.ExhibitionCrawlerInterface;
@@ -21,22 +19,18 @@ public class ExhibitionManager {
     private Object adapter;
     private ExhibitionCrawlerInterface crawler;
     private Context context;
-    private ProgressBar spinner;
 
 
-    public ExhibitionManager(ArrayList<Exhibition> exhibitionList, Object adapter, Context context, ProgressBar spinner) {
+    public ExhibitionManager(ArrayList<Exhibition> exhibitionList, Object adapter, Context context) {
         this.exhibitionList = exhibitionList;
         this.adapter = adapter;
         this.context = context;
-        this.spinner = spinner;
     }
 
     public void refresh() {
         crawler = ExhibitionDataFactory.getExhibitionCrawler("National Museum", context);
         //crawler.setExhibitionList(exhibitionList);
         //crawler.setAdapter(adapter);
-
-        spinner.setVisibility(View.VISIBLE);
 
         if(crawler == null) {
             Log.e("hello", crawler.toString());
@@ -51,7 +45,6 @@ public class ExhibitionManager {
                     exhibitionList.add(exhibition);
                 }
                 ((RecyclerView.Adapter)adapter).notifyDataSetChanged();
-                spinner.setVisibility(View.GONE);
             }
         });
 

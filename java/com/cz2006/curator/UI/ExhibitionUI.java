@@ -35,10 +35,7 @@ public class ExhibitionUI extends AppCompatActivity {
         //spinner = (ProgressBar)findViewById(R.id.progressBar2);
         //Log.e("Spinner", spinner.toString());
         //spinner.setVisibility(View.VISIBLE);
-        //Log.e("aamfsd", "" + R.id.progressBar2);
         setContentView(R.layout.activity_exhibition_ui);
-
-        spinner = (ProgressBar) findViewById(R.id.progressBar2);
 
         rv = (RecyclerView) findViewById(R.id.rv);
 
@@ -51,7 +48,7 @@ public class ExhibitionUI extends AppCompatActivity {
         adapter = new ExhibitionAdapter(exhibitionList);
         rv.setAdapter(adapter);
 
-        exhibitionManager = new ExhibitionManager(exhibitionList, adapter, this, spinner);
+        exhibitionManager = new ExhibitionManager(exhibitionList, adapter, this);
         //spinner.setVisibility(View.GONE);
     }
 
