@@ -20,10 +20,10 @@ import java.util.List;
  * Created by EricLeonardo on 3/23/2016.
  */
 public class SearchAdapter extends RecyclerView.Adapter<ItemViewHolder> {
-    private List<Museum> museums;
+    private ArrayList<Museum> museums;
     private User userLoc;
 
-    public SearchAdapter(List<Museum> m, User u){
+    public SearchAdapter(ArrayList<Museum> m, User u){
         museums = m;
         userLoc = u;
     }
@@ -46,7 +46,7 @@ public class SearchAdapter extends RecyclerView.Adapter<ItemViewHolder> {
         return museums.size();
     }
 
-    public void setFilter(List<Museum> m) {
+    public void setFilter(ArrayList<Museum> m) {
         museums = new ArrayList<>();
         museums.addAll(m);
         notifyDataSetChanged();
