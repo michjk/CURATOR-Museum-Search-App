@@ -37,7 +37,6 @@
             android:label="@string/title_activity_map_screen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
 
@@ -53,7 +52,6 @@
         <activity
             android:name=".UI.MuseumProfileUI"
             android:parentActivityName=".UI.MapUI">
-
         </activity>
 
         <activity
@@ -61,10 +59,11 @@
             android:parentActivityName=".UI.MuseumProfileUI" >
         </activity>
 
+
         <activity
+
             android:name=".UI.SearchUI"
             android:parentActivityName=".UI.MapUI">
-
             <meta-data
                 android:name="android.app.searchable"
                 android:resource="@xml/searchable"/>

@@ -1,6 +1,5 @@
 package com.cz2006.curator.UI;
 
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,12 +9,7 @@ import android.widget.ProgressBar;
 
 import com.cz2006.curator.Managers.ExhibitionManager;
 import com.cz2006.curator.Objects.Exhibition;
-import com.cz2006.curator.Dialogs.LoadingSpinner;
 import com.cz2006.curator.R;
-import com.google.android.gms.appindexing.Action;
-import com.google.android.gms.appindexing.AppIndex;
-import com.google.android.gms.common.api.GoogleApiClient;
-
 
 import java.util.ArrayList;
 
@@ -54,6 +48,7 @@ public class ExhibitionUI extends AppCompatActivity {
         rv.setAdapter(adapter);
 
         exhibitionManager = new ExhibitionManager(exhibitionList, adapter, this);
+        spinner.setVisibility(View.GONE);
     }
 
     @Override

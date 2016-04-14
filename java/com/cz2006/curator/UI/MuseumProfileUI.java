@@ -58,10 +58,13 @@ public class MuseumProfileUI extends AppCompatActivity implements GoogleApiClien
 
         reviewList = new ArrayList<Review>();
         recyclerView = (RecyclerView) findViewById(R.id.rr);
-        rAdapter = new ReviewAdapter(reviewList);
-        RecyclerView.LayoutManager rLayoutManager = new LinearLayoutManager(getApplicationContext());
+
+        LinearLayoutManager rLayoutManager = new LinearLayoutManager(getApplicationContext());
+        rLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(rLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
+
+        rAdapter = new ReviewAdapter(reviewList);
         recyclerView.setAdapter(rAdapter);
     }
 
@@ -114,17 +117,12 @@ public class MuseumProfileUI extends AppCompatActivity implements GoogleApiClien
             TextView website = (TextView) findViewById(R.id.website);
             website.setText("Website: " + museum.getTicketSite());
 
-            reviewList = museum.getReviewList();
-            for (Review r: reviewList) {
+            for (Review r: museum.getReviewList()) {
+                reviewList.add(r);
                 Log.e("Review Debug", r.getAuthorName());
             }
-            recyclerView = (RecyclerView) findViewById(R.id.rr);
-            rAdapter = new ReviewAdapter(reviewList);
-            RecyclerView.LayoutManager rLayoutManager = new LinearLayoutManager(getApplicationContext());
-            recyclerView.setLayoutManager(rLayoutManager);
-            recyclerView.setItemAnimator(new DefaultItemAnimator());
-            recyclerView.setAdapter(rAdapter);
             rAdapter.notifyDataSetChanged();
+            recyclerView.invalidate();
 
             //removes loading spinner
             spinner.setVisibility(View.GONE);

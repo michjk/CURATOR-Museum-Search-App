@@ -36,22 +36,26 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ReviewView
     public ReviewViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.review_list_item, parent, false);
- 
         return new ReviewViewHolder(itemView);
     }
  
     @Override
     public void onBindViewHolder(ReviewViewHolder holder, int position) {
         Review r = reviewList.get(position);
-        holder.author.setText(r.getAuthorName());
-        holder.date.setText(r.getDate().toString());
-        holder.score.setText(r.getRating().toString());
-		holder.text.setText(r.getText());
+        holder.author.setText((r.getAuthorName()!=null) ? r.getAuthorName():"No author");
+        holder.date.setText((r.getDate()!=null) ? r.getDate().toString():"No date");
+        holder.score.setText((r.getRating()!=null) ? r.getRating().toString():"No rating");
+		holder.text.setText((r.getText()!=null) ? r.getText():"No text");
         Log.e("Author", holder.author.toString());
     }
- 
+
     @Override
     public int getItemCount() {
         return reviewList.size();
+    }
+
+    @Override
+    public void onAttachedToRecyclerView(RecyclerView recyclerView) {
+        super.onAttachedToRecyclerView(recyclerView);
     }
 }
