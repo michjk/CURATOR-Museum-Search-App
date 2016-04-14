@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.ProgressBar;
 
 import com.cz2006.curator.Managers.ExhibitionManager;
@@ -34,10 +35,10 @@ public class ExhibitionUI extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //display a loading spinner while data loads
-        //spinner = (ProgressBar)findViewById(R.id.progressBar2);
         //Log.e("Spinner", spinner.toString());
-        //spinner.setVisibility(View.VISIBLE);
         setContentView(R.layout.activity_exhibition_ui);
+        spinner = (ProgressBar)findViewById(R.id.progressBar2);
+        spinner.setVisibility(View.VISIBLE);
 
         rv = (RecyclerView) findViewById(R.id.rv);
 

@@ -5,7 +5,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.View;
 import android.widget.ProgressBar;
 
 
@@ -27,7 +26,7 @@ public class ReviewUI extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.review_activity);
+        setContentView(R.layout.activity_review_ui);
         reviewList = (ArrayList<Review>)getIntent().getSerializableExtra("reviews");
 
         for(Review r:reviewList){

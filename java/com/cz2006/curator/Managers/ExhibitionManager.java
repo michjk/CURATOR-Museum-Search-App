@@ -3,6 +3,7 @@ package com.cz2006.curator.Managers;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
 import android.widget.ProgressBar;
 
 import com.cz2006.curator.Crawler.AsyncRespond;
@@ -41,6 +42,7 @@ public class ExhibitionManager {
             Log.e("hello", crawler.toString());
         }
 
+        spinner.setVisibility(View.VISIBLE);
         crawler.setAsyncRespond(new AsyncRespond() {
             @Override
             public void processFinish(Object output) {
@@ -50,6 +52,7 @@ public class ExhibitionManager {
                     exhibitionList.add(exhibition);
                 }
                 ((RecyclerView.Adapter)adapter).notifyDataSetChanged();
+                spinner.setVisibility(View.GONE);
             }
         });
 
