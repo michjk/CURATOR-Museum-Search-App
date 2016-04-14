@@ -119,7 +119,10 @@ public class MuseumProfileCrawler extends AsyncTask<String, Void, Museum> implem
                 if(dateInSecond == null) {
                     calendar.setTimeInMillis(dateInSecond*1000);
                     date = calendar.getTime();
+                    Log.e("date review", date.getTime() + "");
+
                 }
+
 
                 reviewList.add(new Review(authorName, date, ratingReview, text
                 ));
@@ -263,8 +266,10 @@ public class MuseumProfileCrawler extends AsyncTask<String, Void, Museum> implem
 
     private Long getLong(JSONObject jsonObject, String s) {
         try {
+            Log.e("getLong", jsonObject.getLong(s) + "");
             return jsonObject.getLong(s);
         }catch(Exception e) {
+            Log.e("json getLong", e.getMessage());
             return null;
         }
     }
