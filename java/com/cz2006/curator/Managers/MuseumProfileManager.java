@@ -22,12 +22,11 @@ public class MuseumProfileManager {
     private String placeId;
     private GoogleApiClient mGoogleApiClient;
     private MuseumProfileUI museumUI;
+    private Museum museum;
 
     public Museum getMuseum() {
         return museum;
     }
-
-    private Museum museum;
 
     public MuseumProfileManager(String placeId, GoogleApiClient mGoogleApiClient, MuseumProfileUI ui) {
         this.placeId = placeId;
@@ -36,6 +35,7 @@ public class MuseumProfileManager {
     }
 
     public void refresh() {
+        Log.e("is place still here", placeId.toString());
         crawler = new MuseumProfileCrawler(placeId, mGoogleApiClient, new AsyncRespond() {
             @Override
             public void processFinish(Object output) {

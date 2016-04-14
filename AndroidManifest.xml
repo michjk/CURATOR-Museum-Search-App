@@ -51,7 +51,8 @@
 
         <activity
             android:name=".UI.MuseumProfileUI"
-            android:parentActivityName=".UI.MapUI">
+            android:parentActivityName=".UI.MapUI"
+            android:launchMode="singleTop">
         </activity>
 
         <activity
@@ -59,6 +60,10 @@
             android:parentActivityName=".UI.MuseumProfileUI" >
         </activity>
 
+        <activity
+            android:name=".UI.ReviewUI"
+            android:parentActivityName=".UI.MuseumProfileUI">
+        </activity>
 
         <activity
 

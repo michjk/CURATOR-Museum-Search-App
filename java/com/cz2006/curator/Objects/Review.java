@@ -1,11 +1,12 @@
 package com.cz2006.curator.Objects;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Created by Acceleration on 10/04/2016.
  */
-public class Review {
+public class Review implements Serializable{
 
     private String authorName;
     private Date date;

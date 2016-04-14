@@ -23,7 +23,6 @@
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:id="@+id/review_author"
-					android:textColor="@android:color/primary_text_dark"
 				/>
 				
 				<TextView

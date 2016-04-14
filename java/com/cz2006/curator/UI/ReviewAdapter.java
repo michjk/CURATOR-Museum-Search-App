@@ -44,7 +44,7 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ReviewView
         Review r = reviewList.get(position);
         holder.author.setText((r.getAuthorName()!=null) ? r.getAuthorName():"No author");
         holder.date.setText((r.getDate()!=null) ? r.getDate().toString():"No date");
-        holder.score.setText((r.getRating()!=null) ? r.getRating().toString():"No rating");
+        holder.score.setText((r.getRating()!=null) ? "Rating: "+r.getRating().toString()+"/5.0":"No rating");
 		holder.text.setText((r.getText()!=null) ? r.getText():"No text");
         Log.e("Author", holder.author.toString());
     }

@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.*;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -34,15 +35,10 @@ public class MuseumProfileUI extends AppCompatActivity implements GoogleApiClien
 
     private ArrayList<Review> reviewList;
 
-    private ReviewAdapter rAdapter;
-
-    private RecyclerView recyclerView;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_museum_profile_ui);
         String museumID = getIntent().getStringExtra(EXTRA_MESSAGE);
         ExhibitionConstants.setExhibitionConstants(this);
@@ -55,22 +51,6 @@ public class MuseumProfileUI extends AppCompatActivity implements GoogleApiClien
                 .build();
 
         museumProfileManager = new MuseumProfileManager(museumID, mGoogleApiClient, this);
-
-        reviewList = new ArrayList<Review>();
-        recyclerView = (RecyclerView) findViewById(R.id.rr);
-
-        LinearLayoutManager rLayoutManager = new LinearLayoutManager(getApplicationContext()){
-            @Override
-            public boolean canScrollVertically() {
-                return false;
-            }
-        };
-        rLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        recyclerView.setLayoutManager(rLayoutManager);
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-
-        rAdapter = new ReviewAdapter(reviewList);
-        recyclerView.setAdapter(rAdapter);
     }
 
     @Override
@@ -81,6 +61,7 @@ public class MuseumProfileUI extends AppCompatActivity implements GoogleApiClien
     @Override
     protected void onResume() {
         super.onResume();
+        //museumProfileManager.getMuseum().toString()
         museumProfileManager.refresh();
     }
 
@@ -90,6 +71,14 @@ public class MuseumProfileUI extends AppCompatActivity implements GoogleApiClien
         String message = museumProfileManager.getMuseum().getName();
         // this message means nothing for now
         intent.putExtra(EXTRA_MESSAGE, message);
+        startActivity(intent);
+    }
+
+    public void onClickReview(View view) {
+        // listener for the Review button
+        Intent intent = new Intent(this, ReviewUI.class);
+        // this message means nothing for now
+        intent.putExtra("reviews", reviewList);
         startActivity(intent);
     }
 
@@ -122,12 +111,12 @@ public class MuseumProfileUI extends AppCompatActivity implements GoogleApiClien
             TextView website = (TextView) findViewById(R.id.website);
             website.setText("Website: " + museum.getTicketSite());
 
-            for (Review r: museum.getReviewList()) {
-                reviewList.add(r);
-                Log.e("Review Debug", r.getAuthorName());
-            }
-            rAdapter.notifyDataSetChanged();
-            recyclerView.invalidate();
+            reviewList = museum.getReviewList();
+
+            Button button = (Button)findViewById(R.id.exhibit_button);
+            button.setClickable(true);
+            button = (Button)findViewById(R.id.review_button);
+            button.setClickable(true);
 
             //removes loading spinner
             spinner.setVisibility(View.GONE);
