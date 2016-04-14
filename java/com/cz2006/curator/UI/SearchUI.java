@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.cz2006.curator.Managers.ItemClickSupport;
@@ -59,8 +60,17 @@ public class SearchUI extends AppCompatActivity implements SearchView.OnQueryTex
         ItemClickSupport.addTo(rv).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
             @Override
             public void onItemClicked(RecyclerView recyclerView, int position, View v) {
+                TextView tv = (TextView)v.findViewById(R.id.museum_name);
+                String name = tv.getText().toString();
+                String id = "";
+                for(Museum m:museums){
+                    if(m.getName().compareTo(name) == 0){
+                        id = m.getPlaceID();
+                        break;
+                    }
+                }
                 Intent it = new Intent(getApplicationContext(),MuseumProfileUI.class);
-                it.putExtra(EXTRA_MESSAGE,museums.get(position).getPlaceID());
+                it.putExtra(EXTRA_MESSAGE,id);
                 startActivity(it);
             }
         });
@@ -106,8 +116,8 @@ public class SearchUI extends AppCompatActivity implements SearchView.OnQueryTex
         return super.onOptionsItemSelected(item);
     }
 
-    private List<Museum> filter(List<Museum> arr, String q){
-        List<Museum> ret = new ArrayList<>();
+    private ArrayList<Museum> filter(ArrayList<Museum> arr, String q){
+        ArrayList<Museum> ret = new ArrayList<>();
         for(Museum m:arr)
             if(m.getName().toLowerCase().contains(q.toLowerCase()))
                 ret.add(m);
