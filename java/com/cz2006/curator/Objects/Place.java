@@ -27,6 +27,8 @@ public class Place  implements Serializable {
         return name;
     }
 
+    public double getRating(){ return rating;}
+
     public void setName(String name) {
         this.name = name;
     }

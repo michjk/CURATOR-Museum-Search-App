@@ -52,8 +52,7 @@ public class SearchEngine{
     }
 
     public ArrayList<Museum> byRating() {
-        //search();
-        //Collections.sort(result, new CmpByRating());
+        Collections.sort(result, new CmpByRating());
         return result;
     }
 

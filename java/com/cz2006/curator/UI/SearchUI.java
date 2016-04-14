@@ -30,6 +30,7 @@ public class SearchUI extends AppCompatActivity implements SearchView.OnQueryTex
     private ArrayList<Museum> museums;
     private SearchEngine engine;
     private Context context;
+    private User userLoc;
 
     public final static String EXTRA_MESSAGE = "com.cz2006.curator.MESSAGE";
 
@@ -41,15 +42,18 @@ public class SearchUI extends AppCompatActivity implements SearchView.OnQueryTex
         rv = (RecyclerView)findViewById(R.id.resultsList);
         rv.setLayoutManager(new LinearLayoutManager(this));
 
-        User userLoc = (User) getIntent().getSerializableExtra("userLocation");
+        userLoc = (User) getIntent().getSerializableExtra("userLocation");
         museums = (ArrayList<Museum>) getIntent().getSerializableExtra("museumList");
-        museums = (new SearchEngine(museums, userLoc)).byProximity();
+        //museums = (new SearchEngine(museums, userLoc)).byProximity();
+        updateView();
+    }
 
+    public void updateView(){
         if(museums == null){
             Log.e("ERROR","museums are null");
             return;
         }
-        adapter = new SearchAdapter(museums);
+        adapter = new SearchAdapter(museums,userLoc);
         rv.setAdapter(adapter);
 
         ItemClickSupport.addTo(rv).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
@@ -60,7 +64,6 @@ public class SearchUI extends AppCompatActivity implements SearchView.OnQueryTex
                 startActivity(it);
             }
         });
-
     }
 
 
@@ -91,6 +94,14 @@ public class SearchUI extends AppCompatActivity implements SearchView.OnQueryTex
         int id = item.getItemId();
         if(id == R.id.action_search) {
             return true;
+        }
+        else if(id == R.id.sortByProximity){
+            museums = (new SearchEngine(museums, userLoc)).byProximity();
+            updateView();
+        }
+        else{
+            museums = (new SearchEngine(museums, userLoc)).byRating();
+            updateView();
         }
         return super.onOptionsItemSelected(item);
     }

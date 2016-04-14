@@ -10,4 +10,14 @@
         app:showAsAction="always"
         app:actionViewClass="android.support.v7.widget.SearchView"
     />
+
+    <item
+        android:id="@+id/sortByProximity"
+        android:title="Sort by proximity"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/sortByRating"
+        android:title="Sort by rating"
+        app:showAsAction="never"/>
+
 </menu>
