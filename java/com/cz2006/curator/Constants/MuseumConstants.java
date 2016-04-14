@@ -6,7 +6,7 @@ package com.cz2006.curator.Constants;
 public class MuseumConstants {
 
     //*  <<- Add/remove one '/' here to toggle between key 1 and key 2
-    private static final String API_KEY = "AIzaSyAMA_EoylT2Dz_grch1O9Wd8bziEpKzAg4";
+    private static final String API_KEY = "AIzaSyDuxQ0E7rKTxqVWDvr2YQegWQWJ1wJnuT0";
     /*/
     private static final String API_KEY = "AIzaSyAiaOUB4sQnnkyNZeo63hGHjFrYX8UEB6E";
     //*/

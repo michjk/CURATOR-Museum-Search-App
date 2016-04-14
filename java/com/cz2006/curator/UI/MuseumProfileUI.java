@@ -59,7 +59,12 @@ public class MuseumProfileUI extends AppCompatActivity implements GoogleApiClien
         reviewList = new ArrayList<Review>();
         recyclerView = (RecyclerView) findViewById(R.id.rr);
 
-        LinearLayoutManager rLayoutManager = new LinearLayoutManager(getApplicationContext());
+        LinearLayoutManager rLayoutManager = new LinearLayoutManager(getApplicationContext()){
+            @Override
+            public boolean canScrollVertically() {
+                return false;
+            }
+        };
         rLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(rLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
