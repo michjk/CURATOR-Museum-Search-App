@@ -38,7 +38,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/ratingBar"
                 android:rating="0"
-                style="@style/Base.Widget.AppCompat.RatingBar"/>
+                style="@style/Base.Widget.AppCompat.RatingBar.Small"/>
         </LinearLayout>
     </android.support.v7.widget.CardView>
 
