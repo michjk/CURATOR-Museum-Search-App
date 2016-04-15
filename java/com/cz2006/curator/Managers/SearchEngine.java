@@ -20,6 +20,9 @@ public class SearchEngine{
         result = arr;
     }
 
+    public SearchEngine() {
+    }
+
     //getters & setters
     public ArrayList<Museum> getResult() {
         return result;
@@ -40,6 +43,10 @@ public class SearchEngine{
     }
 
     public class CmpByProximity implements Comparator<Museum> {
+
+
+        public CmpByProximity() {
+        }
 
         public double dist(double lat1, double lon1, double lat2, double lon2){
             double R = 6371000;
