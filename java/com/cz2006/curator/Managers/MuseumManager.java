@@ -47,7 +47,6 @@ public class MuseumManager {
                 }
             }
         });
-
         crawler.refresh();
     }
 

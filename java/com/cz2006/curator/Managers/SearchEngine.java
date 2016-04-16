@@ -49,7 +49,7 @@ public class SearchEngine{
         }
 
         public double dist(double lat1, double lon1, double lat2, double lon2){
-            double R = 6371000;
+            double R = 6371;
             double p1 = Math.toRadians(lat1);
             double p2 = Math.toRadians(lat2);
             double dp = Math.toRadians(lat2-lat1);

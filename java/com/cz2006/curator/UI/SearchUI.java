@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.cz2006.curator.Dialogs.GenericAlertDialog;
 import com.cz2006.curator.Managers.ItemClickSupport;
 import com.cz2006.curator.Managers.SearchEngine;
 import com.cz2006.curator.Objects.Museum;
@@ -28,9 +29,9 @@ public class SearchUI extends AppCompatActivity implements SearchView.OnQueryTex
     private RecyclerView rv;
     private SearchAdapter adapter;
     private ArrayList<Museum> museums;
-    private SearchEngine engine;
-    private Context context;
     private User userLoc;
+    private static String updatedQuery;
+    private SearchView searchView;
 
     public final static String EXTRA_MESSAGE = "com.cz2006.curator.MESSAGE";
 
@@ -51,6 +52,8 @@ public class SearchUI extends AppCompatActivity implements SearchView.OnQueryTex
     public void updateView(){
         if(museums == null){
             Log.e("ERROR","museums are null");
+            GenericAlertDialog genericAlertDialog = new GenericAlertDialog();
+            genericAlertDialog.show(getFragmentManager(), "No museums found, try again!");
             return;
         }
         adapter = new SearchAdapter(museums,userLoc);
@@ -75,11 +78,39 @@ public class SearchUI extends AppCompatActivity implements SearchView.OnQueryTex
         });
     }
 
+    public void updateView(String q){
+        if(museums == null){
+            Log.e("ERROR","museums are null");
+            GenericAlertDialog genericAlertDialog = new GenericAlertDialog();
+            genericAlertDialog.show(getFragmentManager(), "No museums found, try again!");
+            return;
+        }
+        adapter = new SearchAdapter(filter(museums, q),userLoc);
+        rv.setAdapter(adapter);
+
+        ItemClickSupport.addTo(rv).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
+            @Override
+            public void onItemClicked(RecyclerView recyclerView, int position, View v) {
+                TextView tv = (TextView)v.findViewById(R.id.museum_name);
+                String name = tv.getText().toString();
+                String id = "";
+                for(Museum m:museums){
+                    if(m.getName().compareTo(name) == 0){
+                        id = m.getPlaceID();
+                        break;
+                    }
+                }
+                Intent it = new Intent(getApplicationContext(),MuseumUI.class);
+                it.putExtra(EXTRA_MESSAGE,id);
+                startActivity(it);
+            }
+        });
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
         getMenuInflater().inflate(R.menu.search_ui_menu, menu);
-        SearchView searchView = (SearchView) MenuItemCompat.getActionView(menu.findItem(R.id.searchBar));
+        searchView = (SearchView) MenuItemCompat.getActionView(menu.findItem(R.id.searchBar));
         SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
         if(searchView == null){
             Toast.makeText(this,"Null search view",Toast.LENGTH_LONG);
@@ -106,21 +137,15 @@ public class SearchUI extends AppCompatActivity implements SearchView.OnQueryTex
         }
         else if(id == R.id.sortByProximity){
             museums = (new SearchEngine(museums, userLoc)).byProximity();
-            updateView();
+            //adapter.setFilter(filter(museums, searchView.getQuery().toString()));
+            updateView(searchView.getQuery().toString());
         }
         else{
             museums = (new SearchEngine(museums, userLoc)).byRating();
-            updateView();
+            //adapter.setFilter(filter(museums, searchView.getQuery().toString()));
+            updateView(searchView.getQuery().toString());
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    private ArrayList<Museum> filter(ArrayList<Museum> arr, String q){
-        ArrayList<Museum> ret = new ArrayList<>();
-        for(Museum m:arr)
-            if(m.getName().toLowerCase().contains(q.toLowerCase()))
-                ret.add(m);
-        return ret;
     }
 
     @Override
@@ -130,7 +155,16 @@ public class SearchUI extends AppCompatActivity implements SearchView.OnQueryTex
 
     @Override
     public boolean onQueryTextChange(String newText) {
-        adapter.setFilter(filter(museums,newText));
+        //updatedQuery = newText;
+        adapter.setFilter(filter(museums, newText));
         return true;
+    }
+
+    public ArrayList<Museum> filter(ArrayList<Museum> arr, String q){
+        ArrayList<Museum> ret = new ArrayList<>();
+        for(Museum m:arr)
+            if(m.getName().toLowerCase().contains(q.toLowerCase()))
+                ret.add(m);
+        return ret;
     }
 }

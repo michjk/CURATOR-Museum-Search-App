@@ -39,7 +39,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ItemViewHo
             SearchEngine.CmpByProximity getDist = new SearchEngine().new CmpByProximity();
 
             name_TextView.setText(m.getName());
-            desc_TextView.setText(String.format("Distance: %.2f km", getDist.dist(m.getLatitude(),m.getLongitude(),userLoc.getLatitude(),userLoc.getLongitude())/1000));
+            desc_TextView.setText(String.format("Distance: %.2f km", getDist.dist(m.getLatitude(),m.getLongitude(),userLoc.getLatitude(),userLoc.getLongitude())));
             ratingBar.setRating((float)m.getRating());
         }
     }
