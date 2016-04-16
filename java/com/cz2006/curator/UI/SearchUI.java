@@ -30,7 +30,6 @@ public class SearchUI extends AppCompatActivity implements SearchView.OnQueryTex
     private SearchAdapter adapter;
     private ArrayList<Museum> museums;
     private User userLoc;
-    private static String updatedQuery;
     private SearchView searchView;
 
     public final static String EXTRA_MESSAGE = "com.cz2006.curator.MESSAGE";
@@ -85,7 +84,7 @@ public class SearchUI extends AppCompatActivity implements SearchView.OnQueryTex
             genericAlertDialog.show(getFragmentManager(), "No museums found, try again!");
             return;
         }
-        adapter = new SearchAdapter(filter(museums, q),userLoc);
+        adapter = new SearchAdapter(new SearchEngine().filter(museums, q),userLoc);
         rv.setAdapter(adapter);
 
         ItemClickSupport.addTo(rv).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
@@ -155,16 +154,8 @@ public class SearchUI extends AppCompatActivity implements SearchView.OnQueryTex
 
     @Override
     public boolean onQueryTextChange(String newText) {
-        //updatedQuery = newText;
-        adapter.setFilter(filter(museums, newText));
+        adapter.setFilter(new SearchEngine().filter(museums, newText));
         return true;
     }
 
-    public ArrayList<Museum> filter(ArrayList<Museum> arr, String q){
-        ArrayList<Museum> ret = new ArrayList<>();
-        for(Museum m:arr)
-            if(m.getName().toLowerCase().contains(q.toLowerCase()))
-                ret.add(m);
-        return ret;
-    }
 }

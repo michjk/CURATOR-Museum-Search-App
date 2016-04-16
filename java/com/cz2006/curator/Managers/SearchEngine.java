@@ -42,6 +42,14 @@ public class SearchEngine{
         return result;
     }
 
+    public ArrayList<Museum> filter(ArrayList<Museum> arr, String q){
+        ArrayList<Museum> ret = new ArrayList<>();
+        for(Museum m:arr)
+            if(m.getName().toLowerCase().contains(q.toLowerCase()))
+                ret.add(m);
+        return ret;
+    }
+
     public class CmpByProximity implements Comparator<Museum> {
 
 
