@@ -192,7 +192,6 @@ public class MapUI extends AppCompatActivity
     @Override
     public void onStart() {
         super.onStart();
-
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client.connect();
@@ -233,7 +232,7 @@ public class MapUI extends AppCompatActivity
 
     @Override
     public void onInfoWindowClick(final Marker marker) {
-        Intent intent = new Intent(this, MuseumProfileUI.class);
+        Intent intent = new Intent(this, MuseumUI.class);
         String message = mapManager.findID(marker.getTitle());
         // Name should be placed in title
         intent.putExtra(EXTRA_MESSAGE, message);

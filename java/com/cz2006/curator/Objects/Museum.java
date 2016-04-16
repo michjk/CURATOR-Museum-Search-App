@@ -57,6 +57,7 @@ public class Museum implements Serializable{
     }
 
     // Here be getter/setters; abandon hope all ye who enter
+    // dammit vicson
 
     public String getPlaceID(){
         return placeID;

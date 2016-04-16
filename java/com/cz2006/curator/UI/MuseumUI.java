@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -13,7 +14,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.cz2006.curator.Constants.ExhibitionConstants;
-import com.cz2006.curator.Managers.MuseumProfileManager;
+import com.cz2006.curator.Managers.MuseumManager;
 import com.cz2006.curator.Objects.Museum;
 import com.cz2006.curator.Objects.Review;
 import com.cz2006.curator.R;
@@ -23,11 +24,11 @@ import com.google.android.gms.location.places.Places;
 
 import java.util.ArrayList;
 
-public class MuseumProfileUI extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener{
+public class MuseumUI extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener{
 
     private final static String EXTRA_MESSAGE = "com.cz2006.curator.MESSAGE";
 
-    private MuseumProfileManager museumProfileManager;
+    private MuseumManager museumManager;
 
     private GoogleApiClient mGoogleApiClient;
 
@@ -53,25 +54,25 @@ public class MuseumProfileUI extends AppCompatActivity implements GoogleApiClien
                 .enableAutoManage(this, this)
                 .build();
 
-        museumProfileManager = new MuseumProfileManager(museumID, mGoogleApiClient, this);
+        museumManager = new MuseumManager(museumID, mGoogleApiClient, this);
     }
 
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-        Log.e("MuseumProfileUI", connectionResult.toString());
+        Log.e("MuseumUI", connectionResult.toString());
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        //museumProfileManager.getMuseum().toString()
-        museumProfileManager.refresh();
+        //museumManager.getMuseum().toString()
+        museumManager.refresh();
     }
 
     public void onClickExhibition(View view) {
         // listener for the Exhibition button
         Intent intent = new Intent(this, ExhibitionUI.class);
-        String message = museumProfileManager.getMuseum().getName();
+        String message = museumManager.getMuseum().getName();
         // this message means nothing for now
         intent.putExtra(EXTRA_MESSAGE, message);
         startActivity(intent);
@@ -83,6 +84,15 @@ public class MuseumProfileUI extends AppCompatActivity implements GoogleApiClien
         // this message means nothing for now
         intent.putExtra("reviews", reviewList);
         startActivity(intent);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            onBackPressed();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     public void displayData(Museum museum) {

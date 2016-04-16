@@ -20,6 +20,9 @@ public class SearchEngine{
         result = arr;
     }
 
+    public SearchEngine() {
+    }
+
     //getters & setters
     public ArrayList<Museum> getResult() {
         return result;
@@ -39,10 +42,22 @@ public class SearchEngine{
         return result;
     }
 
+    public ArrayList<Museum> filter(ArrayList<Museum> arr, String q){
+        ArrayList<Museum> ret = new ArrayList<>();
+        for(Museum m:arr)
+            if(m.getName().toLowerCase().contains(q.toLowerCase()))
+                ret.add(m);
+        return ret;
+    }
+
     public class CmpByProximity implements Comparator<Museum> {
 
+
+        public CmpByProximity() {
+        }
+
         public double dist(double lat1, double lon1, double lat2, double lon2){
-            double R = 6371000;
+            double R = 6371;
             double p1 = Math.toRadians(lat1);
             double p2 = Math.toRadians(lat2);
             double dp = Math.toRadians(lat2-lat1);

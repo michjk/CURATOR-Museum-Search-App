@@ -40,10 +40,10 @@ public class ExhibitionDataFactory {
         }/* catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (InstantiationException e) {
-            Log.e("errorrrrr", "insta error");
+            Log.e("errorrrrr", "instantiation error");
             e.printStackTrace();
         } catch (IllegalAccessException e) {
-            Log.e("errorrrrr", "illegal error");
+            Log.e("errorrrrr", "illegal access error");
             e.printStackTrace();
         }*/
 

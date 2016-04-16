@@ -51,19 +51,19 @@
             android:value="@integer/google_play_services_version" />
 
         <activity
-            android:name=".UI.MuseumProfileUI"
+            android:name=".UI.MuseumUI"
             android:parentActivityName=".UI.MapUI"
             android:launchMode="singleTop">
         </activity>
 
         <activity
             android:name=".UI.ExhibitionUI"
-            android:parentActivityName=".UI.MuseumProfileUI" >
+            android:parentActivityName=".UI.MuseumUI" >
         </activity>
 
         <activity
             android:name=".UI.ReviewUI"
-            android:parentActivityName=".UI.MuseumProfileUI">
+            android:parentActivityName=".UI.MuseumUI">
         </activity>
 
         <activity
