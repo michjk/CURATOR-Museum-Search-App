@@ -64,7 +64,7 @@ public class SearchEngine{
             double dl = Math.toRadians(lon2-lon1);
 
             double a = Math.sin(dp/2.0) * Math.sin(dp/2.0)
-                    + Math.cos(p1/2.0) * Math.cos(p2/2.0) * Math.sin(dl/2.0) * Math.sin(dl/2.0);
+                    + Math.cos(p1) * Math.cos(p2) * Math.sin(dl/2.0) * Math.sin(dl/2.0);
 
             double c = 2.0 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
 
