@@ -12,7 +12,10 @@ import com.cz2006.curator.Objects.Review;
 import com.cz2006.curator.R;
 
 import java.util.List;
- 
+
+/**
+ * ReviewAdapter is a class for controlling RecyclerView of list of review in ReviewUI.
+ */
 public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ReviewViewHolder> {
  
     private List<Review> reviewList;

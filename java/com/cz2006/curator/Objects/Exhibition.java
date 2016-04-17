@@ -3,7 +3,7 @@ package com.cz2006.curator.Objects;
 import android.graphics.Bitmap;
 
 /**
- * Exhibition is a entity class for storing data of an exhibition.
+ * Exhibition is an entity class for storing data of an exhibition.
  */
 public class Exhibition {
     private String name;

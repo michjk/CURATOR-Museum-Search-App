@@ -6,7 +6,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
- * Museum is a class for storing data of a museum.
+ * Museum is an entity class for storing data of a museum.
  */
 public class Museum implements Serializable{
 

@@ -15,7 +15,7 @@ import com.cz2006.curator.Managers.SearchEngine;
 import java.util.ArrayList;
 
 /**
- * Created by EricLeonardo on 3/23/2016.
+ * SearchAdapter is a class for controlling RecyclerView of list of museum in SearchUI.
  */
 public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ItemViewHolder> {
     private ArrayList<Museum> museums;

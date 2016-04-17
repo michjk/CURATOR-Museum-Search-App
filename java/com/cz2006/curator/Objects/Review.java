@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * Review is a class to store details of a review of a certain museum.
+ * Review is an entity class to store details of a review of a certain museum.
  * This class is aggregated inside Museum Class.
  */
 public class Review implements Serializable{

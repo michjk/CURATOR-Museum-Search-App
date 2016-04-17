@@ -13,7 +13,9 @@ import com.cz2006.curator.R;
 
 import java.util.List;
 
-
+/**
+ * ExhibitionAdapter is a class for controlling RecyclerView of list of exhibition in ExhibitionUI.
+ */
 public class ExhibitionAdapter extends RecyclerView.Adapter<ExhibitionAdapter.ExhibitionViewHolder> {
 
     private List<Exhibition> exhibitionList;
