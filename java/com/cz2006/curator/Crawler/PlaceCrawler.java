@@ -29,16 +29,31 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
 /**
- * Created by Acceleration on 08/04/2016.
+ * PlaceCrawler is a class for crawling list of museum in singapore from XML file of Google Place API.
+ * The class implements PlaceCrawlerInterface as interface between manager to this class.
+ * The class send XML request through Google Place API and extract specific data.
+ * One museum is saved in a Place object.
+ * The process run in asynchronous manner.
  */
 public class PlaceCrawler extends AsyncTask<String, Void, ArrayList<Place>> implements PlaceCrawlerInterface {
-
+    /**
+     * This is an object for specifying callback function
+     * when a crawler finish processing data.
+     */
     public AsyncRespond asyncRespond;
 
+    /**
+     * This is contructor for PlaceCrawler
+     * @param asyncRespond This is an object for specifying callback function
+     */
     public PlaceCrawler(AsyncRespond asyncRespond) {
         this.asyncRespond = asyncRespond;
     }
 
+    /**
+     * This method is for starting fetching and processing data in a crawler.
+     * The process run in asynchronous manner.
+     */
     @Override
     public void refresh() {
         this.execute(PlaceConstants.URL);
@@ -88,7 +103,7 @@ public class PlaceCrawler extends AsyncTask<String, Void, ArrayList<Place>> impl
         asyncRespond.processFinish(places);
     }
 
-    public String getXmlFromUrl(String add) {
+    private String getXmlFromUrl(String add) {
 
         String xml = null;
         StringBuffer sb = new StringBuffer();
@@ -124,7 +139,7 @@ public class PlaceCrawler extends AsyncTask<String, Void, ArrayList<Place>> impl
         return xml;
     }
 
-    public Document getDomElement(String xml){
+    private Document getDomElement(String xml){
         Document doc = null;
         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
         try {
@@ -150,12 +165,12 @@ public class PlaceCrawler extends AsyncTask<String, Void, ArrayList<Place>> impl
         return doc;
     }
 
-    public String getValue(Element item, String str) {
+    private String getValue(Element item, String str) {
         NodeList n = item.getElementsByTagName(str);
         return this.getElementValue(n.item(0));
     }
 
-    public final String getElementValue( Node elem ) {
+    private String getElementValue( Node elem ) {
         Node child;
         if( elem != null){
             if (elem.hasChildNodes()){

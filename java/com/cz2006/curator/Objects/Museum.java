@@ -6,7 +6,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
- * Created by Vicson on 18/3/2016.
+ * Museum is a class for storing data of a museum.
  */
 public class Museum implements Serializable{
 
@@ -23,7 +23,6 @@ public class Museum implements Serializable{
     private String ticketSite;
     private ArrayList<Review> reviewList;
     private String placeID;
-    // arraylist of reviews and exhibitions are not implemented yet
 
     public Museum(String name, double latitude, double longitude, String address, double rating, ArrayList<String> openingHours, String phone, String email, String description, String ticketSite, ArrayList<Review> reviewList, Bitmap image,String placeID){
         this.name = name;
@@ -55,9 +54,6 @@ public class Museum implements Serializable{
         description = "The Sample Museum " + id + " is a sample museum.";
         ticketSite = "";
     }
-
-    // Here be getter/setters; abandon hope all ye who enter
-    // dammit vicson
 
     public String getPlaceID(){
         return placeID;

@@ -29,20 +29,38 @@ import java.util.Calendar;
 import java.util.Date;
 
 /**
- * Created by Acceleration on 09/04/2016.
+ * MuseumCrawler is a class for crawling museum detail from JSON file of Google Place API.
+ * The class implements MuseumCrawlerInterface as interface between manager to this class.
+ * The class send JSON request through Google Place API and extract specific data.
+ * One museum is saved in one Museum object.
+ * The process run in asynchronous manner.
  */
 public class MuseumCrawler extends AsyncTask<String, Void, Museum> implements MuseumCrawlerInterface {
 
+    /**
+     * This is an object for specifying callback function
+     * when a crawler finish processing data.
+     */
     public AsyncRespond asyncRespond;
     private GoogleApiClient mGoogleApiClient;
     private String placeId;
 
+    /**
+     * This is a constructor of MuseumCrawler
+     * @param placeId This is place id of a museum
+     * @param mGoogleApiClient This is client class of Google Places API
+     * @param asyncRespond This is a class for specifying callback function
+     */
     public MuseumCrawler(String placeId, GoogleApiClient mGoogleApiClient, AsyncRespond asyncRespond) {
         this.asyncRespond = asyncRespond;
         this.placeId = placeId;
         this.mGoogleApiClient = mGoogleApiClient;
     }
 
+    /**
+     * This method is for starting fetching and processing data in a crawler.
+     * This process run in asynchronous manner.
+     */
     @Override
     public void refresh() {
         this.execute(MuseumConstants.URL + placeId);
@@ -160,7 +178,7 @@ public class MuseumCrawler extends AsyncTask<String, Void, Museum> implements Mu
         asyncRespond.processFinish(museum);
     }
 
-    public String getJSONFromUrl(String add) {
+    private String getJSONFromUrl(String add) {
 
         String json = null;
         StringBuffer sb = new StringBuffer();

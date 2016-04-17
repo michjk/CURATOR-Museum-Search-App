@@ -1,7 +1,8 @@
 package com.cz2006.curator.Constants;
 
 /**
- * Created by Acceleration on 09/04/2016.
+ * MuseumConstants is a class that contains constants related to
+ * MuseumCrawler class.
  */
 public class MuseumConstants {
 
@@ -12,11 +13,9 @@ public class MuseumConstants {
     //private static final String API_KEY = "AIzaSyBDt3csb4pRV8WakW3IXOd-d9HpgiADJAc";
     //private static final String API_KEY = "AIzaSyArqFUbafO3xHWJLapd2MdEoDxxkSuLYkE";
 
-
+    /**
+     * This constant contains URL to request JSON from google place API to get museum profile.
+     * Place ID is not included.
+     */
     public static String URL = "https://maps.googleapis.com/maps/api/place/details/json?key=" + API_KEY + "&placeid=";
-    public static final String KEY_ITEM = "result"; // parent node
-    public static final String KEY_ID = "place_id";
-    public static final String KEY_NAME = "name";
-    public static final String KEY_LAT = "lat";
-    public static final String KEY_LNG = "lng";
 }

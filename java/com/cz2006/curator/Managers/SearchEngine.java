@@ -7,6 +7,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
+/**
+ * SearchEngine is a class to control and manage SearchUI. The class use data from PlaceCrawler to
+ * generate a list of museum with filtering feature and sorting feature.
+ */
 public class SearchEngine{
     //attribute(s)
     private ArrayList<Museum> result;
@@ -32,16 +36,30 @@ public class SearchEngine{
         this.result = result;
     }
 
+    /**
+     * This method is to sort list of museum based on proximity.
+     * @return a sorted museum based on proximity.
+     */
     public ArrayList<Museum> byProximity() {
         Collections.sort(result,new CmpByProximity());
         return result;
     }
 
+    /**
+     * This method is to sort list of museum based on rating.
+     * @return a sorted museum based on rating.
+     */
     public ArrayList<Museum> byRating() {
         Collections.sort(result, new CmpByRating());
         return result;
     }
 
+    /**
+     * This method is for filtering list of museum based on key words.
+     * @param arr array of museum that need to be filtered.
+     * @param q key words for filtering.
+     * @return filtered array list of museum.
+     */
     public ArrayList<Museum> filter(ArrayList<Museum> arr, String q){
         ArrayList<Museum> ret = new ArrayList<>();
         for(Museum m:arr)
@@ -50,13 +68,16 @@ public class SearchEngine{
         return ret;
     }
 
+    /**
+     * CmpByProximity is a comparator class for sorting based on proximity
+     */
     public class CmpByProximity implements Comparator<Museum> {
 
 
         public CmpByProximity() {
         }
 
-        public double dist(double lat1, double lon1, double lat2, double lon2){
+        private double dist(double lat1, double lon1, double lat2, double lon2){
             double R = 6371;
             double p1 = Math.toRadians(lat1);
             double p2 = Math.toRadians(lat2);
@@ -80,6 +101,9 @@ public class SearchEngine{
         }
     }
 
+    /**
+     * CmpByRating is a comparator class for sorting based on proximity
+     */
     public class CmpByRating implements Comparator<Museum>{
         @Override
         public int compare(Museum a, Museum b) {

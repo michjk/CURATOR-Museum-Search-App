@@ -1,8 +1,13 @@
 package com.cz2006.curator.Crawler;
 
 /**
- * Created by Acceleration on 09/04/2016.
+ * MuseumCrawlerInterface is an interface class to connect
+ * MuseumManager and MuseumCrawler
  */
 public interface MuseumCrawlerInterface {
+
+    /**
+     * This method is to start fetching and processing data in a crawler.
+     */
     void refresh();
 }

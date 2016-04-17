@@ -11,7 +11,8 @@ import com.cz2006.curator.UI.MuseumUI;
 import com.google.android.gms.common.api.GoogleApiClient;
 
 /**
- * Created by Acceleration on 10/04/2016.
+ * MuseumManager is a class to control and manage MuseumUI. It acts as connector between
+ * MuseumUI and MuseumCrawler.
  */
 public class MuseumManager {
 
@@ -21,16 +22,30 @@ public class MuseumManager {
     private MuseumUI museumUI;
     private Museum museum;
 
+    /**
+     * This is a method to get a museum that has been crawled.
+     * @return a museum that has been crawled.
+     */
     public Museum getMuseum() {
         return museum;
     }
 
+    /**
+     * This is constructor of MuseumMananger
+     * @param placeId  ID of a museum.
+     * @param mGoogleApiClient client object to manage Google Place API.
+     * @param ui MuseumUI object which is managed by MuseumManager.
+     */
     public MuseumManager(String placeId, GoogleApiClient mGoogleApiClient, MuseumUI ui) {
         this.placeId = placeId;
         this.mGoogleApiClient = mGoogleApiClient;
         this.museumUI = ui;
     }
 
+    /**
+     *  This is method for executing MuseumCrawler and override AsyncRespond as callback function
+     *  to display the result after the crawler finish.
+     */
     public void refresh() {
         Log.e("is place still here", placeId.toString());
         crawler = new MuseumCrawler(placeId, mGoogleApiClient, new AsyncRespond() {

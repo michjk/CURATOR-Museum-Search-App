@@ -7,31 +7,40 @@ import com.cz2006.curator.Objects.Exhibition;
 import java.util.ArrayList;
 
 /**
- * Created by Acceleration on 21/03/2016.
+ * ExhibitionCrawlerTemplate is a class that act as template of specific exhibition crawlers.
+ * The class implement ExhibitionCrawlerInterface as connector to manager.
+ * The template contains methods to extract specific data from html exhibition page, but the methods
+ * return null. The methods need to be overridden in subclasses to implement algorithm for extracting data.
  */
 public abstract class ExhibitionCrawlerTemplate extends AsyncTask<Void,Void,Void> implements ExhibitionCrawlerInterface {
     //array list that contains list of exhibiton that has been crawled
     protected ArrayList<Exhibition> exhibitionList;
+
+    /**
+     * This is an object for specifying callback function
+     * when a crawler finish processing data.
+     */
     public AsyncRespond asyncRespond;
     //protected Object adapter;
+
 
     protected ExhibitionCrawlerTemplate() {
         exhibitionList = new ArrayList<>();
         //adapter = null;
     }
 
+    /**
+     * This method is to set class that contains callback function.
+     * The callback function is to pass data from crawler to manager.
+     * @param asyncRespond This parameter is for specifying callback function when a crawler finish processing data.
+     */
     public void setAsyncRespond(AsyncRespond asyncRespond) {
         this.asyncRespond = asyncRespond;
     }
 
-    /*public void setAdapter(Object adapter) {
-        this.adapter = adapter;
-    }*/
-
-    /*public void setExhibitionList(ArrayList<Exhibition> exhibitionList) {
-        this.exhibitionList = exhibitionList;
-    }*/
-
+    /**
+     * This method is for starting fetching and processing data in a crawler.
+     */
     public void refresh() {
         this.execute();
     }

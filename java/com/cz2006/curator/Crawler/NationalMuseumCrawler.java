@@ -11,9 +11,17 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 /**
- * Created by Acceleration on 24/03/2016.
+ * NationalMuseumCrawler is a class for crawling exhibition detail of National Museum of Singapore.
+ * This class extend ExhibitionCrawlerTemplate as template of this specific crawler.
+ * The class use JSOUP API to parse HTML of exhibition page.
+ * The class send http request to get HTML page and parse specific data from the file.
+ * One exhibition is saved in one Exhibition object.
+ * The process is started by calling refresh method and run in asynchronous manner.
  */
 public class NationalMuseumCrawler extends ExhibitionCrawlerTemplate  {
+    /**
+     * This is contructor of NationalMuseumCrawler. It calls its parent's constructor.
+     */
     public NationalMuseumCrawler() {
         super();
     }

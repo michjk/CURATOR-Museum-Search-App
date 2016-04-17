@@ -3,7 +3,8 @@ package com.cz2006.curator.Objects;
 import java.io.Serializable;
 
 /**
- * Created by Acceleration on 09/04/2016.
+ * Place is a class that store small detail of a museum, including location.
+ * The class is used to generate pin point in MapUI.
  */
 public class Place  implements Serializable {
 

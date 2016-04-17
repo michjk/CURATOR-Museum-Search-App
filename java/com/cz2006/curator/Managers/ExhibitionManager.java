@@ -13,7 +13,8 @@ import com.cz2006.curator.Objects.Exhibition;
 import java.util.ArrayList;
 
 /**
- * Created by Acceleration on 25/03/2016.
+ * ExhibitionManager is a class to control and manage ExhibitionUI. It acts as connector between
+ * ExhibitionUI and ExhibitionCrawler.
  */
 public class ExhibitionManager {
 
@@ -24,7 +25,14 @@ public class ExhibitionManager {
     private ProgressBar spinner;
     private String museumName;
 
-
+    /**
+     * This is a constructor for ExhibitionManager.
+     * @param exhibitionList This is parameter for list of exhibition
+     * @param adapter This is adapter for managing RecyclerView
+     * @param context This is context of current activity/UI class
+     * @param spinner This is object to generate Progress Bar
+     * @param museumName This is name of museum who has exhibitions that can be crawled.
+     */
     public ExhibitionManager(ArrayList<Exhibition> exhibitionList, Object adapter, Context context, ProgressBar spinner, String museumName) {
         this.exhibitionList = exhibitionList;
         this.adapter = adapter;
@@ -33,6 +41,10 @@ public class ExhibitionManager {
         this.museumName = museumName;
     }
 
+    /**
+     *  This is method for executing ExhibitionCrawler and override AsyncRespond as callback function
+     *  to display the result after the crawler finish.
+     */
     public void refresh() {
         crawler = ExhibitionDataFactory.getExhibitionCrawler(museumName, context);
         //crawler.setExhibitionList(exhibitionList);

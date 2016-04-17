@@ -19,10 +19,17 @@ import java.net.URL;
 import java.net.URLConnection;
 
 /**
- * Created by Acceleration on 21/03/2016.
+ * SingaporeArtMuseumCrawler is a class for crawling exhibition detail of Singapore Art Museum.
+ * This class extend ExhibitionCrawlerTemplate as template of this specific crawler.
+ * The class use JSOUP API to parse HTML of exhibition page.
+ * The class send http request to get HTML page and parse specific data from the file.
+ * One exhibition is saved in one Exhibition object.
+ * The process is started by calling refresh method and run in asynchronous manner.
  */
 public class SingaporeArtMuseumCrawler extends ExhibitionCrawlerTemplate {
-
+    /**
+     * This is constructor of NationalMuseumCrawler. It calls its parent's constructor.
+     */
     public SingaporeArtMuseumCrawler() {
         super();
     }

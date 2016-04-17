@@ -9,27 +9,30 @@ import java.io.InputStreamReader;
 import java.util.HashMap;
 
 /**
- * Created by Acceleration on 18/03/2016.
+ * ExhibitionConstants is a class that contains constants related to
+ * exhibition crawler class.
  */
 public class ExhibitionConstants {
-    public static HashMap<String, String> exhibitionUrl = new HashMap<String, String>() /*{
-        {
-            put("Art Science Museum","http://www.marinabaysands.com/museum/exhibitions-and-events.html");
-            put("National Museum of Singapore", "http://nationalmuseum.sg/exhibitions/exhibition-list");
-            put("Singapore Art Museum", "https://www.singaporeartmuseum.sg/exhibitions/current.html");
-            put("National Gallery Singapore", "http://nationalmuseum.sg/exhibitions/exhibition-list#&&activeTab=Permanent&page=0");
-        }
-    }*/;
+    /**
+     * exhibitionUrl contains mapping from museum name to exhibition url.
+     * This mapping is used for specifying url of exhibition html page.
+     */
+    public static HashMap<String, String> exhibitionUrl = new HashMap<>();
 
-    public static HashMap<String, String> exhibitionClass = new HashMap<String, String>() /*{
-        {
-            put("Art Science Museum","http://www.marinabaysands.com/museum/exhibitions-and-events.html");
-            put("National Museum of Singapore", "NationalMuseumCrawler");
-            put("Singapore Art Museum", "SingaporeArtMuseumCrawler");
-            put("National Gallery Singapore", "http://nationalmuseum.sg/exhibitions/exhibition-list#&&activeTab=Permanent&page=0");
-        }
-    }*/;
+    /**
+     * exhibitionClass contains mapping from museum name to museum's exhibition
+     * crawler class name. This mapping is used for specifying class that need to be
+     * loaded by ExhibitionDataFactory class.
+     */
+    public static HashMap<String, String> exhibitionClass = new HashMap<>();
 
+    /**
+     * This function gets data from exhibition.txt to initialize HashMap exhibitionClass
+     * (mapping from museum name to museum's exhibition crawler class name) and
+     * HashMap exhibitionUrl (mapping from museum name to exhibition url).
+     *
+     * @param  context  context data of current activity/UI class
+     */
     public static void setExhibitionConstants(Context context) {
         BufferedReader reader = null;
         try {

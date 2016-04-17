@@ -3,7 +3,8 @@ package com.cz2006.curator.Objects;
 import java.io.Serializable;
 
 /**
- * Created by Vicson on 18/3/2016.
+ * User iss a class for storing current location of the user.
+ * This class is used for Map and Search feature.
  */
 public class User implements Serializable{
 

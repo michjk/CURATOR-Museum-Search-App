@@ -7,12 +7,22 @@ import com.cz2006.curator.Constants.ExhibitionConstants;
 import com.cz2006.curator.Crawler.ExhibitionCrawlerInterface;
 
 /**
- * Created by Acceleration on 06/04/2016.
+ * ExhibitionDataFactory is a class factory for selecting and instantiation
+ * exhibition crawler class since there are many specific crawler for certain museum.
+ * This class implement dynamic loading factory pattern by using
+ * system class loader from java. The class name is from exhibitionClass HashMap
+ * from ExhibitionConstants.
  */
 public class ExhibitionDataFactory {
 
     public static final String packageName = "com.cz2006.curator.Crawler.";
 
+    /**
+     * This method is for selecting and instantiation exhibition crawler class.
+     * @param exhibitionOption This is a string for selecting class name from exhibitionClass.
+     * @param context This is context of current activity/UI class.
+     * @return Specific exhibition crawler object that has been selected.
+     */
     public static ExhibitionCrawlerInterface getExhibitionCrawler(String exhibitionOption, Context context) {
 
         ExhibitionCrawlerInterface exhibitionCrawler = null;

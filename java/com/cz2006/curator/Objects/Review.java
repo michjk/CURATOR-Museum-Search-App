@@ -4,7 +4,8 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * Created by Acceleration on 10/04/2016.
+ * Review is a class to store details of a review of a certain museum.
+ * This class is aggregated inside Museum Class.
  */
 public class Review implements Serializable{
 
