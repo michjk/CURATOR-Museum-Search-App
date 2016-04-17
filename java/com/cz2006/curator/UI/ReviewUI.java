@@ -13,6 +13,10 @@ import com.cz2006.curator.R;
 
 import java.util.ArrayList;
 
+/**
+ * ReviewUI is a boundary class for displaying list of review of a museum.
+ * The reviews are from a museum object.
+ */
 public class ReviewUI extends AppCompatActivity {
 
     private RecyclerView rv;

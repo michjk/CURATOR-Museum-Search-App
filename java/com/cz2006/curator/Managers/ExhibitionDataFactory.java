@@ -19,8 +19,8 @@ public class ExhibitionDataFactory {
 
     /**
      * This method is for selecting and instantiation exhibition crawler class.
-     * @param exhibitionOption This is a string for selecting class name from exhibitionClass.
-     * @param context This is context of current activity/UI class.
+     * @param exhibitionOption a string for selecting class name from exhibitionClass.
+     * @param context a context of current activity/UI class.
      * @return Specific exhibition crawler object that has been selected.
      */
     public static ExhibitionCrawlerInterface getExhibitionCrawler(String exhibitionOption, Context context) {

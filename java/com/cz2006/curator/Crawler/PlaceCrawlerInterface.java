@@ -1,8 +1,8 @@
 package com.cz2006.curator.Crawler;
 
 /**
- * ExhibitionCrawlerInterface is an interface class to connect
- * ExhibitionManager and exhibition crawler
+ * PlaceCrawlerInterface is an interface class to connect
+ * MapManager and PlaceCrawler
  */
 public interface PlaceCrawlerInterface {
     /**

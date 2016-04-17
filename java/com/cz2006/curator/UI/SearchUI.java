@@ -25,6 +25,10 @@ import com.cz2006.curator.R;
 
 import java.util.ArrayList;
 
+/**
+ * SearchUI is a boundary class that display list of museum and providing interface to use search filter
+ * and sorting by proximity or by rating. This class is managed by SearchManager.
+ */
 public class SearchUI extends AppCompatActivity implements SearchView.OnQueryTextListener{
     private RecyclerView rv;
     private SearchAdapter adapter;

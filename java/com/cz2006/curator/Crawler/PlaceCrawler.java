@@ -44,7 +44,7 @@ public class PlaceCrawler extends AsyncTask<String, Void, ArrayList<Place>> impl
 
     /**
      * This is contructor for PlaceCrawler
-     * @param asyncRespond This is an object for specifying callback function
+     * @param asyncRespond an object for specifying callback function
      */
     public PlaceCrawler(AsyncRespond asyncRespond) {
         this.asyncRespond = asyncRespond;

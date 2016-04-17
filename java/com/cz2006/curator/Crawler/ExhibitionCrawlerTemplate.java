@@ -32,7 +32,7 @@ public abstract class ExhibitionCrawlerTemplate extends AsyncTask<Void,Void,Void
     /**
      * This method is to set class that contains callback function.
      * The callback function is to pass data from crawler to manager.
-     * @param asyncRespond This parameter is for specifying callback function when a crawler finish processing data.
+     * @param asyncRespond for specifying callback function when a crawler finish processing data.
      */
     public void setAsyncRespond(AsyncRespond asyncRespond) {
         this.asyncRespond = asyncRespond;

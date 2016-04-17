@@ -24,6 +24,10 @@ import com.google.android.gms.location.places.Places;
 
 import java.util.ArrayList;
 
+/**
+ * This is a boundary class for displaying detail of a museum. This class is shown when
+ * a museum is selected from SearchUI or MuseumUI. This class is managed by MuseumManager.
+ */
 public class MuseumUI extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener{
 
     private final static String EXTRA_MESSAGE = "com.cz2006.curator.MESSAGE";
@@ -95,6 +99,11 @@ public class MuseumUI extends AppCompatActivity implements GoogleApiClient.OnCon
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * This is method for displaying museum data. The data is got from MuseumManager.
+     *
+     * @param museum museum data from MuseumManager
+     */
     public void displayData(Museum museum) {
 
         String openingHourList = "Opening Hours: \n";

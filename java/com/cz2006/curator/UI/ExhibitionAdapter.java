@@ -14,9 +14,6 @@ import com.cz2006.curator.R;
 import java.util.List;
 
 
-/**
- * Created by Acceleration on 21/03/2016.
- */
 public class ExhibitionAdapter extends RecyclerView.Adapter<ExhibitionAdapter.ExhibitionViewHolder> {
 
     private List<Exhibition> exhibitionList;

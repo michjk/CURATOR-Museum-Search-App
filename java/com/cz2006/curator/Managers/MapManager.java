@@ -33,7 +33,7 @@ public class MapManager {
 
     /**
      * This is a method for getting list of museum crawled.
-     * @return This is list of museum.
+     * @return list of museum.
      */
     public ArrayList<Museum> getMuseumList(){
         if(placeList == null) return null;

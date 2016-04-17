@@ -77,7 +77,16 @@ public class SearchEngine{
         public CmpByProximity() {
         }
 
-        private double dist(double lat1, double lon1, double lat2, double lon2){
+        /**
+         * This is a method for calculating distance between 2 place with consideration of earth's radius.
+         *
+         * @param lat1 latitude of place 1
+         * @param lon1 longitude of place 1
+         * @param lat2 latitude of place 2
+         * @param lon2 longitude of place 2
+         * @return distance between 2 places with consideration of earth's radius.
+         */
+        public double dist(double lat1, double lon1, double lat2, double lon2){
             double R = 6371;
             double p1 = Math.toRadians(lat1);
             double p2 = Math.toRadians(lat2);

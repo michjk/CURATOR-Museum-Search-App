@@ -28,7 +28,7 @@ import java.net.URLConnection;
  */
 public class SingaporeArtMuseumCrawler extends ExhibitionCrawlerTemplate {
     /**
-     * This is constructor of NationalMuseumCrawler. It calls its parent's constructor.
+     * This is constructor of SingaporeArtMuseumCrawler. It calls its parent's constructor.
      */
     public SingaporeArtMuseumCrawler() {
         super();

@@ -13,6 +13,11 @@ import com.cz2006.curator.R;
 
 import java.util.ArrayList;
 
+
+/**
+ * ExhibitionUI is a boundary class for displaying list of exhibitions of a museum.
+ * It is managed by ExhibitionManager.
+ */
 public class ExhibitionUI extends AppCompatActivity {
 
     private final static String EXTRA_MESSAGE = "com.cz2006.curator.MESSAGE";

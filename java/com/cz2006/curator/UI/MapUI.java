@@ -26,17 +26,14 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
-import com.google.maps.android.kml.KmlContainer;
-import com.google.maps.android.kml.KmlLayer;
-import com.google.maps.android.kml.KmlPlacemark;
-import com.google.maps.android.kml.KmlPolygon;
 
 import java.util.ArrayList;
 
-//import android.widget.Toast;
-
+/**
+ * MapUI is a boundary class for displaying location of museum in map and
+ * getting direction to a certain museum.
+ */
 public class MapUI extends AppCompatActivity
         implements
         GoogleMap.OnMyLocationButtonClickListener,
@@ -92,6 +89,10 @@ public class MapUI extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * This is a method to get current user location for calculating distance.
+     * @return User object with current location as attribute
+     */
     public User getUserLocation(){
         Location loc = mMap.getMyLocation();
             if(loc!=null){
@@ -143,41 +144,6 @@ public class MapUI extends AppCompatActivity
         mMap.moveCamera(CameraUpdateFactory.newLatLng(museumLoc));
         mMap.animateCamera( CameraUpdateFactory.zoomTo( 15.0f ) );
 
-//        try {
-//            kl = new KmlLayer(mMap,R.raw.museums,getApplicationContext());
-//            kl.addLayerToMap();
-//
-//            /*
-//            mMap.setOnMapLoadedCallback(new GoogleMap.OnMapLoadedCallback() {
-//                @Override
-//                public void onMapLoaded() {
-//                    moveCameraToKml(kl);
-//                }
-//            });
-//            */
-//        } catch (XmlPullParserException e) {
-//            e.printStackTrace();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-
-    }
-
-    private void moveCameraToKml(KmlLayer kmlLayer) {
-        //Retrieve the first container in the KML layer
-        KmlContainer container = kmlLayer.getContainers().iterator().next();
-        //Retrieve a nested container within the first container
-        container = container.getContainers().iterator().next();
-        //Retrieve the first placemark in the nested container
-        KmlPlacemark placemark = container.getPlacemarks().iterator().next();
-        //Retrieve a polygon object in a placemark
-        KmlPolygon polygon = (KmlPolygon) placemark.getGeometry();
-        //Create LatLngBounds of the outer coordinates of the polygon
-        LatLngBounds.Builder builder = new LatLngBounds.Builder();
-        for (LatLng latLng : polygon.getOuterBoundaryCoordinates()) {
-            builder.include(latLng);
-        }
-        mMap.moveCamera(CameraUpdateFactory.newLatLngBounds(builder.build(), 1));
     }
 
 

@@ -31,7 +31,7 @@ public class ExhibitionConstants {
      * (mapping from museum name to museum's exhibition crawler class name) and
      * HashMap exhibitionUrl (mapping from museum name to exhibition url).
      *
-     * @param  context  context data of current activity/UI class
+     * @param  context  context data of current activity/UI class.
      */
     public static void setExhibitionConstants(Context context) {
         BufferedReader reader = null;
