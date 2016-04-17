@@ -87,6 +87,10 @@ public class SearchEngine{
          * @return distance between 2 places with consideration of earth's radius.
          */
         public double dist(double lat1, double lon1, double lat2, double lon2){
+            if(lat1 < -90 || lat1 > 90) return 1e15;
+		    if(lon1 < -180 || lon1 > 180) return 1e15;
+		    if(lat2 < -90 || lat2 > 90) return 1e15;
+		    if(lon2 < -180 || lon2 > 180) return 1e15;
             double R = 6371;
             double p1 = Math.toRadians(lat1);
             double p2 = Math.toRadians(lat2);
